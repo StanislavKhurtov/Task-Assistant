@@ -20,6 +20,7 @@ const App = () => {
         <div className="App">
             <Todolist title="What to Learn" tasks={tasks1}/>
             <Todolist title="Movies" tasks={tasks2}/>
+            <Todolist title="Movies" tasks={tasks2}/>
 
         </div>
     );
