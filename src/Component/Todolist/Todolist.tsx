@@ -10,7 +10,8 @@ export type TypeTask = {
 type PropsType = {
     title: string,
     tasks: TypeTask[],
-    removeTask: (id: number) => void,
+    removeTask:Function
+
 
 }
 
@@ -24,9 +25,11 @@ export const Todolist = (props: PropsType) => {
             </div>
             <ol>
                 {
-                    props.tasks.map(el => <li key={el.id}><input type="checkbox" checked={el.isDone}/>
+                    props.tasks.map(el =>
+                        <li key={el.id}>
+                            <input type="checkbox" checked={el.isDone}/>
                             <span>{el.title}</span>
-                            <button onClick={props.removeTask(el.id)}>x</button>
+                            <button onClick={()=>props.removeTask(el.id)}>x</button>
                         </li>
                     )
                 }
