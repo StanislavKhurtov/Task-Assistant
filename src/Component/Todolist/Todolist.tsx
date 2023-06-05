@@ -33,14 +33,13 @@ export const Todolist = (props: PropsType) => {
         }
     }
 
-    const addTask  = () => {
+    const addTask = () => {
         props.addTask(newTaskTitle)
         setNewTaskTitle("")
     }
-    const onAllClickHandler = () =>  props.changeFilter("all");
+    const onAllClickHandler = () => props.changeFilter("all");
     const onActiveClickHandler = () => props.changeFilter("active");
     const onCompletedClickHandler = () => props.changeFilter("completed");
-
 
 
     return (
@@ -56,13 +55,17 @@ export const Todolist = (props: PropsType) => {
             </div>
             <ol>
                 {
-                    props.tasks.map(el =>
-                        <li key={el.id}>
-                            <input type="checkbox" checked={el.isDone}/>
-                            <span>{el.title}</span>
-                            <button onClick={() => props.removeTask(el.id)}>x</button>
-                        </li>
-                    )
+                    props.tasks.map(el => {
+                        const onRemoveHandler = () => props.removeTask(el.id);
+
+                        return (
+                            <li key={el.id}>
+                                <input type="checkbox" checked={el.isDone}/>
+                                <span>{el.title}</span>
+                                <button onClick={onRemoveHandler}>x</button>
+                            </li>
+                        )
+                    })
                 }
             </ol>
             <div>
