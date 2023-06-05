@@ -1,4 +1,5 @@
 import React from "react";
+import {FilterValuesType} from "../../App";
 
 export type TypeTask = {
     id: number,
@@ -10,7 +11,8 @@ export type TypeTask = {
 type PropsType = {
     title: string,
     tasks: TypeTask[],
-    removeTask:Function
+    removeTask: (id: number) => void,
+    changeFilter: (value: FilterValuesType) => void
 
 
 }
@@ -29,15 +31,24 @@ export const Todolist = (props: PropsType) => {
                         <li key={el.id}>
                             <input type="checkbox" checked={el.isDone}/>
                             <span>{el.title}</span>
-                            <button onClick={()=>props.removeTask(el.id)}>x</button>
+                            <button onClick={() => props.removeTask(el.id)}>x</button>
                         </li>
                     )
                 }
             </ol>
             <div>
-                <button>All</button>
-                <button>Active</button>
-                <button>Completed</button>
+                <button onClick={() => {
+                    props.changeFilter("all")
+                }}>All
+                </button>
+                <button onClick={() => {
+                    props.changeFilter("active")
+                }}>Active
+                </button>
+                <button onClick={() => {
+                    props.changeFilter("completed")
+                }}>Completed
+                </button>
             </div>
         </div>
     );
