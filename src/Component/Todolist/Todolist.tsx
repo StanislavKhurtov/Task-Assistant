@@ -32,6 +32,7 @@ export const Todolist = (props: PropsType) => {
                 }}/>
                 <button onClick={() => {
                     props.addTask(newTaskTitle)
+                    setNewTaskTitle("")
                 }}>+
                 </button>
             </div>
