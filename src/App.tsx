@@ -14,7 +14,7 @@ const App = () => {
         {id: v1(), title: "Rest API", isDone: false},
         {id: v1(), title: "GraphQl", isDone: false},
     ]);
-    console.log(tasks)
+
 
     let [filter, setFilter] = useState<FilterValuesType>("all")
 
@@ -29,7 +29,11 @@ const App = () => {
     }
 
     const addTask = (title: string) => {
-        let newTask = {id: v1(), title: title, isDone: false};
+        let newTask = {
+            id: v1(),
+            title: title,
+            isDone: false
+        };
         let newAddTasks = [newTask, ...tasks];
         setTasks(newAddTasks);
     }
