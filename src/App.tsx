@@ -22,6 +22,15 @@ const App = () => {
         setFilter(value)
     }
 
+    const changeStatus =(taskId: string, isDone:boolean) => {
+       let task = tasks.find(el=>el.id === taskId)
+        if(task) {
+            task.isDone = isDone;
+        }
+        let copy = [...tasks,]
+        setTasks(copy)
+    }
+
 
     const removeTask = (id: string) => {
         let filteredTask = tasks.filter((el) => el.id !== id)
@@ -56,6 +65,7 @@ const App = () => {
                 removeTask={removeTask}
                 changeFilter={changeFilter}
                 addTask={addTask}
+                changeTaskStatus={changeStatus}
             />
         </div>
     );
