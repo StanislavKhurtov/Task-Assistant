@@ -15,13 +15,15 @@ const App = () => {
 
 
     const changeStatus = (taskId: string, isDone: boolean, todolistId: string) => {
-        let chTask = tasks[todolistId]
+      /*  let chTask = tasks[todolistId]
         let task = chTask.find(el => el.id === taskId)
         if (task) {
             task.isDone = isDone;
 
             setTasks({...tasks})
-        }
+        }*/
+
+        setTasks({...tasks, [todolistId] : tasks[todolistId].map(el => el.id === taskId ? {...el, isDone} : el)})
     };
 
     const removeTask = (id: string, todolistId: string) => {
@@ -39,10 +41,13 @@ const App = () => {
             title: title,
             isDone: false,
         };
-        let task = tasks[todolistId];
+       /* let task = tasks[todolistId];
         let newAddTasks = [newTask, ...task];
         tasks[todolistId] = newAddTasks;
-        setTasks({...tasks});
+        setTasks({...tasks});*/
+
+
+        setTasks({...tasks, [todolistId]: [newTask, ...tasks[todolistId]]})
 
     };
 
