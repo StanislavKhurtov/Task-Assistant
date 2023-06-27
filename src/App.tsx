@@ -25,10 +25,12 @@ const App = () => {
     };
 
     const removeTask = (id: string, todolistId: string) => {
-        let task = tasks[todolistId]
+        /*let task = tasks[todolistId]
         let filterTasks = task.filter(el => el.id !== id)
         tasks[todolistId] = filterTasks
-        setTasks({...tasks})
+        setTasks({...tasks})*/
+
+        setTasks({...tasks,[todolistId]: tasks[todolistId].filter(el => el.id !== id)})
     };
 
     const addTask = (todolistId: string, title: string) => {
