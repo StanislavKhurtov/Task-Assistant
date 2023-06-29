@@ -1,6 +1,6 @@
 import React, {useState} from 'react';
 import './App.css';
-import {Todolist} from "./Component/Todolist/Todolist";
+import {Todolist, TypeTask} from "./Component/Todolist/Todolist";
 import {v1} from "uuid";
 import {AddItemForm} from "./Component/AddItemForm/AddItemForm";
 
@@ -11,9 +11,16 @@ type TodolistType = {
     title: string,
     filter: FilterValuesType
 }
+type TaskStateType = {
+    [key: string]: Array<TypeTask>
+}
+
 
 const App = () => {
 
+    const changeTaskTitle=(taskId: string, newTitle: string, todolistId: string) => {
+        setTasks({...tasks, [todolistId]: tasks[todolistId].map(el => el.id === taskId ? {...el, title:newTitle} : el)})
+    };
 
     const changeStatus = (taskId: string, isDone: boolean, todolistId: string) => {
         setTasks({...tasks, [todolistId]: tasks[todolistId].map(el => el.id === taskId ? {...el, isDone} : el)})
@@ -66,7 +73,7 @@ const App = () => {
         {id: todolistID2, title: "What to buy", filter: "all"},
     ])
 
-    let [tasks, setTasks] = useState({
+    let [tasks, setTasks] = useState<TaskStateType>({
         [todolistID1]: [
             {id: v1(), title: "Html&CSS", isDone: true},
             {id: v1(), title: "JS", isDone: true},
@@ -84,8 +91,7 @@ const App = () => {
         let todolist: TodolistType = {id: v1(), title: title, filter: "all"};
         setTodolist([todolist, ...todolists]);
         setTasks({...tasks, [todolist.id]: []})
-    }
-
+    };
 
     return (
         <div className="App">
@@ -102,7 +108,6 @@ const App = () => {
                     tasksForTodolist = tasksForTodolist.filter(el => !el.isDone);
                 }
 
-
                 return (
                     <Todolist
                         key={el.id}
@@ -113,6 +118,7 @@ const App = () => {
                         changeFilter={changeFilter}
                         addTask={addTask}
                         changeTaskStatus={changeStatus}
+                        changeTaskTitle={changeTaskTitle}
                         filter={el.filter}
                         removeTodolist={removeTodolist}
                     />
