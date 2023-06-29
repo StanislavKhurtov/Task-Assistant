@@ -18,8 +18,19 @@ type TaskStateType = {
 
 const App = () => {
 
-    const changeTaskTitle=(taskId: string, newTitle: string, todolistId: string) => {
-        setTasks({...tasks, [todolistId]: tasks[todolistId].map(el => el.id === taskId ? {...el, title:newTitle} : el)})
+    const changeTodolistTitle = (id: string, newTitle: string) => {
+        const todolist = todolists.find(el => el.id === id);
+        if (todolist) {
+            todolist.title = newTitle;
+            setTodolist([...todolists])
+        }
+    }
+
+    const changeTaskTitle = (taskId: string, newTitle: string, todolistId: string) => {
+        setTasks({
+            ...tasks,
+            [todolistId]: tasks[todolistId].map(el => el.id === taskId ? {...el, title: newTitle} : el)
+        })
     };
 
     const changeStatus = (taskId: string, isDone: boolean, todolistId: string) => {
@@ -59,7 +70,7 @@ const App = () => {
            }*/
     };
 
-    let removeTodolist = (todolistId: string) => {
+    const removeTodolist = (todolistId: string) => {
         setTodolist(todolists.filter(el => el.id !== todolistId))
         delete tasks[todolistId]
         setTasks({...tasks})
@@ -121,6 +132,7 @@ const App = () => {
                         changeTaskTitle={changeTaskTitle}
                         filter={el.filter}
                         removeTodolist={removeTodolist}
+                        changeTodolistTitle={changeTodolistTitle}
                     />
                 );
             })}
