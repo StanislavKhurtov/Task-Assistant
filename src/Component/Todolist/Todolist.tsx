@@ -29,10 +29,9 @@ export const Todolist = (props: PropsType) => {
     const onActiveClickHandler = () => props.changeFilter(props.id, "active");
     const onCompletedClickHandler = () => props.changeFilter(props.id, "completed");
     const removeTodolist = () => props.removeTodolist(props.id);
-    
-    const addTask = (title:string) => props.addTask(props.id, title);
 
 
+    const addTask = (title:string) =>props.addTask(props.id, title);
 
 
     return (
