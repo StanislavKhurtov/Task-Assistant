@@ -2,6 +2,7 @@ import React, {useState} from 'react';
 import './App.css';
 import {Todolist} from "./Component/Todolist/Todolist";
 import {v1} from "uuid";
+import {AddItemForm} from "./Component/AddItemForm/AddItemForm";
 
 export type FilterValuesType = "all" | "active" | "completed";
 
@@ -82,6 +83,7 @@ const App = () => {
 
     return (
         <div className="App">
+            <AddItemForm addItem={()=>{}}/>
 
             {todolists.map((el) => {
 

@@ -1,10 +1,9 @@
 import React, {ChangeEvent, KeyboardEvent, useState} from 'react';
 
 type AddItemFormPropsType = {
-    id: string
-    addTask: (todolistId: string, title: string) => void
-
+    addItem: (title: string) => void
 }
+
 export const AddItemForm = (props: AddItemFormPropsType) => {
 
     const [newTaskTitle, setNewTaskTitle] = useState("");
@@ -18,14 +17,14 @@ export const AddItemForm = (props: AddItemFormPropsType) => {
     const onKeyPressHandler = (e: KeyboardEvent<HTMLInputElement>) => {
         setError(null);
         if (e.charCode === 13) {
-            props.addTask(props.id, newTaskTitle)
+            props.addItem(newTaskTitle)
             setNewTaskTitle("")
         }
     };
 
     const addTask = () => {
         if (newTaskTitle.trim() !== "") {
-            props.addTask(props.id, newTaskTitle.trim())
+            props.addItem(newTaskTitle.trim())
             setNewTaskTitle("")
         } else {
             setError("Title is requares")
