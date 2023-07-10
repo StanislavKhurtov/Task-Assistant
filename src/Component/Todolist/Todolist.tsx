@@ -3,7 +3,7 @@ import {FilterValuesType} from "../../App";
 import {AddItemForm} from "../AddItemForm/AddItemForm";
 import {EditableSpan} from "../EditableSpan/EditableSpan";
 import DeleteForeverIcon from '@material-ui/icons/DeleteForever';
-import {Button, IconButton} from "@material-ui/core";
+import {Button, Checkbox, IconButton} from "@material-ui/core";
 import {Delete} from "@material-ui/icons";
 
 
@@ -70,7 +70,7 @@ export const Todolist = (props: PropsType) => {
                                 <IconButton aria-label="delete" onClick={onRemoveHandler}>
                                     <Delete sx={{fontSize: 16}} />
                                 </IconButton>
-                                <input type="checkbox" onChange={onChangeStatusHandler} checked={el.isDone}/>
+                                <Checkbox  onChange={onChangeStatusHandler} checked={el.isDone}/>
                                 <EditableSpan title={el.title} onChange={onChangeTitleHandler}/>
                             </li>
                         )
