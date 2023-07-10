@@ -2,6 +2,7 @@
     padding: 50px;
     display: flex;
     justify-content: space-evenly;
+    font-family: "Roboto";
 }
 .error {
     border:1px solid red;
