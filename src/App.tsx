@@ -4,6 +4,7 @@ import {Todolist, TypeTask} from "./Component/Todolist/Todolist";
 import {v1} from "uuid";
 import {AddItemForm} from "./Component/AddItemForm/AddItemForm";
 
+
 export type FilterValuesType = "all" | "active" | "completed";
 
 type TodolistType = {
