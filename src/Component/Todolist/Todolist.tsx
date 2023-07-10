@@ -3,7 +3,8 @@ import {FilterValuesType} from "../../App";
 import {AddItemForm} from "../AddItemForm/AddItemForm";
 import {EditableSpan} from "../EditableSpan/EditableSpan";
 import DeleteForeverIcon from '@material-ui/icons/DeleteForever';
-import {blue} from "@material-ui/core/colors";
+import {Button, IconButton} from "@material-ui/core";
+import {Delete} from "@material-ui/icons";
 
 
 export type TypeTask = {
@@ -45,7 +46,9 @@ export const Todolist = (props: PropsType) => {
     return (
         <div>
             <h3><EditableSpan title={props.title} onChange={ChangeTodolistTitle}/>
-                <button onClick={removeTodolist}>x</button>
+                <IconButton aria-label="delete" onClick={removeTodolist}>
+                    <Delete />
+                </IconButton>
             </h3>
             <AddItemForm addItem={addTask}/>
             <ul>
@@ -63,11 +66,10 @@ export const Todolist = (props: PropsType) => {
                         const onRemoveHandler = () => props.removeTask(el.id, props.id);
 
                         return (
-                            <li key={el.id} className={el.isDone ? "isDone" : ""}>
-                                <button onClick={onRemoveHandler}>
-                                    <DeleteForeverIcon sx={{fontSize: 16}}
-                                    />
-                                </button>
+                            <li key={el.id} className={(!el.isDone ? "isDone" : "") + " " + "item"}>
+                                <IconButton aria-label="delete" onClick={onRemoveHandler}>
+                                    <Delete sx={{fontSize: 16}} />
+                                </IconButton>
                                 <input type="checkbox" onChange={onChangeStatusHandler} checked={el.isDone}/>
                                 <EditableSpan title={el.title} onChange={onChangeTitleHandler}/>
                             </li>
