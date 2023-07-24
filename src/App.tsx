@@ -18,7 +18,6 @@ type TaskStateType = {
     [key: string]: Array<TypeTask>
 }
 
-
 const App = () => {
 
     const changeTodolistTitle = (id: string, newTitle: string) => {
