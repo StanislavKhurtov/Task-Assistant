@@ -45,7 +45,14 @@ export const tasksReducer = (state: TaskStateType, action: ActionTypes): TaskSta
             return {
                 ...state,
                 [action.todolistId]: state[action.todolistId].map(el => el.id === action.taskId ? {...el, isDone: action.isDone} : el)}
-
+        case 'CHANGE-TASK-TITLE':
+            return {
+                ...state,
+                [action.todolistId]: state[action.todolistId].map(el => el.id === action.taskId ? {
+                    ...el,
+                    title: action.newTitle
+                } : el)
+            }
         default:
             throw new Error("I don't understand this type")
     }
@@ -63,6 +70,8 @@ export const changeTaskStatusAC = (todolistId: string, taskId: string, isDone: b
     return {type: 'CHANGE-TASK-STATUS', todolistId: todolistId, taskId: taskId, isDone:isDone};
 }
 
-
+export const changeTaskTitleAC = (todolistId: string, taskId: string, newTitle: string): ChangeTaskTitleActionType => {
+    return {type: 'CHANGE-TASK-TITLE', todolistId: todolistId, taskId: taskId, newTitle: newTitle};
+}
 
 
