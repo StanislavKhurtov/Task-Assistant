@@ -1,4 +1,4 @@
-# Todolist for student
+\\ Todolist for student
 
 //==========================================================
 // lesson1
@@ -17,7 +17,7 @@
 //==========================================================
 // lesson#08 - Todolist for student (reducer, unit test)
 
-- как работает reducer –
+-- как работает reducer –
 – начало. игрушечные тесты
 – тесты для reducer
 – иммутабельность для редьюсера
@@ -27,10 +27,13 @@
 – типизация actions
 – action creators
 – debugger
+
 //==========================================================
 // lesson№ 09 - Todolist for student 09 (reducer for tasks, unit test)
- – начало
- – тесты
- – white board
-//≠===≠=========
+– начало
+– тесты
+– white board
+
+//==========================================================
+
 //lesson10 - Reducer
