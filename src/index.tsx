@@ -1,8 +1,7 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import './index.css';
-import {App} from './App';
-import {AppWithReducer} from "./AppWithReducer";
+import {AppWithRedux} from "./AppWithRedux";
 
 
-ReactDOM.render(<AppWithReducer/>, document.getElementById('root'));
+ReactDOM.render(<AppWithRedux />, document.getElementById('root'));

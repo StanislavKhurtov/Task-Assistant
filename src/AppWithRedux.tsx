@@ -28,7 +28,7 @@ export type TasksStateType = {
 }
 
 
-export const AppWithReducer = () => {
+export const AppWithRedux = () => {
 
     const todolistId_1 = v1();
     const todolistId_2 = v1();
