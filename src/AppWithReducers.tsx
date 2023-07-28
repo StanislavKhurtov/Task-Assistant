@@ -1,4 +1,4 @@
-import React, {useReducer, useState} from 'react';
+import React, {useReducer} from 'react';
 import './App.css';
 import {Todolist, TypeTask} from "./Component/Todolist/Todolist";
 import {v1} from "uuid";
@@ -6,7 +6,7 @@ import {AddItemForm} from "./Component/AddItemForm/AddItemForm";
 import {AppBar, Button, IconButton, Toolbar, Typography} from "@material-ui/core";
 import {Menu} from "@material-ui/icons";
 import {todolistsReducer} from "./state/todolists-reducer";
-import {removeTasksAC, tasksReducer} from "./state/tasks-reducer";
+import {addTaskAC, removeTasksAC, tasksReducer} from "./state/tasks-reducer";
 
 
 export type FilterValuesType = "all" | "active" | "completed";
@@ -38,13 +38,13 @@ export const AppWithReducers = () => {
     };
 
     const removeTask = (id: string, todolistId: string) => {
-        const action = removeTasksAC(id,todolistId);
+        const action = removeTasksAC(id, todolistId);
         dispatchTasksReducer(action)
     };
 
     const addTask = (todolistId: string, title: string) => {
-        let newTask = {id: v1(), title: title, isDone: false};
-        setTasks({...tasks, [todolistId]: [newTask, ...tasks[todolistId]]})
+        const action = addTaskAC(todolistId, title);
+        dispatchTasksReducer(action);
     };
 
     const changeFilter = (todolistID: string, value: FilterValuesType) => {
@@ -60,12 +60,12 @@ export const AppWithReducers = () => {
     let todolistID1 = v1();
     let todolistID2 = v1();
 
-    let [todolists, dispatchTodolistsReducer] = useReducer( todolistsReducer,[
+    let [todolists, dispatchTodolistsReducer] = useReducer(todolistsReducer, [
         {id: todolistID1, title: "What to Learn", filter: "all"},
         {id: todolistID2, title: "What to buy", filter: "all"},
     ])
 
-    let [tasks, dispatchTasksReducer] = useReducer(tasksReducer,{
+    let [tasks, dispatchTasksReducer] = useReducer(tasksReducer, {
         [todolistID1]: [
             {id: v1(), title: "Html&CSS", isDone: true},
             {id: v1(), title: "JS", isDone: true},
