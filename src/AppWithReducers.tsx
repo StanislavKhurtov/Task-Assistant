@@ -1,10 +1,11 @@
-import React, {useState} from 'react';
+import React, {useReducer, useState} from 'react';
 import './App.css';
 import {Todolist, TypeTask} from "./Component/Todolist/Todolist";
 import {v1} from "uuid";
 import {AddItemForm} from "./Component/AddItemForm/AddItemForm";
 import {AppBar, Button, IconButton, Toolbar, Typography} from "@material-ui/core";
 import {Menu} from "@material-ui/icons";
+import {todolistsReducer} from "./state/todolists-reducer";
 
 
 export type FilterValuesType = "all" | "active" | "completed";
@@ -57,7 +58,7 @@ export const AppWithReducers = () => {
     let todolistID1 = v1();
     let todolistID2 = v1();
 
-    let [todolists, setTodolist] = useState<Array<TodolistType>>([
+    let [todolists, dispatchTodolistsReducer] = useReducer( todolistsReducer,[
         {id: todolistID1, title: "What to Learn", filter: "all"},
         {id: todolistID2, title: "What to buy", filter: "all"},
     ])
