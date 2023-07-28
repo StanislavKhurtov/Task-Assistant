@@ -6,6 +6,7 @@ import {AddItemForm} from "./Component/AddItemForm/AddItemForm";
 import {AppBar, Button, IconButton, Toolbar, Typography} from "@material-ui/core";
 import {Menu} from "@material-ui/icons";
 import {todolistsReducer} from "./state/todolists-reducer";
+import {tasksReducer} from "./state/tasks-reducer";
 
 
 export type FilterValuesType = "all" | "active" | "completed";
@@ -63,7 +64,7 @@ export const AppWithReducers = () => {
         {id: todolistID2, title: "What to buy", filter: "all"},
     ])
 
-    let [tasks, setTasks] = useState<TaskStateType>({
+    let [tasks, dispatchTasksReducer] = useReducer(tasksReducer,{
         [todolistID1]: [
             {id: v1(), title: "Html&CSS", isDone: true},
             {id: v1(), title: "JS", isDone: true},
