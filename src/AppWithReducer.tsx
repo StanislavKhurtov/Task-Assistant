@@ -1,4 +1,4 @@
-import React, {useReducer, useState} from 'react';
+import React, {useReducer} from 'react';
 import './App.css';
 import {TaskType, Todolist} from "./Todolist";
 import {v1} from "uuid";
@@ -6,7 +6,7 @@ import {AddItemForm} from "./AddItemForm";
 import {AppBar, Button, Container, Grid, IconButton, Paper, Toolbar, Typography} from "@material-ui/core";
 import {Menu} from "@material-ui/icons";
 import {todolistsReducer} from "./state/todolist-reducer";
-import {removeTaskAC, tasksReducer} from "./state/task-reducer";
+import {addTaskAC, removeTaskAC, tasksReducer} from "./state/task-reducer";
 
 
 export type TodolistType = {
@@ -29,8 +29,7 @@ export const AppWithReducer = () => {
     };
 
     const addTask = (todolistID: string, title: string) => {
-        let newTask = {id: v1(), title: title, isDone: false};
-        setTasks({...tasks, [todolistID]: [newTask, ...tasks[todolistID]]})
+        dispatchToTasksReducer(addTaskAC(todolistID, title));
     };
 
     const changeTaskTitle = (todolistId: string, id: string, newValue: string) => {
@@ -53,7 +52,7 @@ export const AppWithReducer = () => {
     };
 
     const addTodolist = (title: string) => {
-        let newTodolist: TodolistType = {id:v1(), title: title, filter: "all"};
+        let newTodolist: TodolistType = {id: v1(), title: title, filter: "all"};
         setTodolist([newTodolist, ...todolists])
         setTasks({...tasks, [newTodolist.id]: []})
     };
@@ -65,12 +64,12 @@ export const AppWithReducer = () => {
     const todolistId_1 = v1();
     const todolistId_2 = v1();
 
-    let [todolists, dispatchToTodolistReducer] = useReducer(todolistsReducer,[
+    let [todolists, dispatchToTodolistReducer] = useReducer(todolistsReducer, [
         {id: todolistId_1, title: 'What to learn', filter: "all"},
         {id: todolistId_2, title: 'What to buy', filter: "all"},
     ]);
 
-    let [tasks, dispatchToTasksReducer] = useReducer(tasksReducer,{
+    let [tasks, dispatchToTasksReducer] = useReducer(tasksReducer, {
         [todolistId_1]: [
             {id: v1(), title: 'HTML&CSS', isDone: true},
             {id: v1(), title: 'JavaScript', isDone: true},
