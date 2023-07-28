@@ -6,7 +6,7 @@ import {AddItemForm} from "./AddItemForm";
 import {AppBar, Button, Container, Grid, IconButton, Paper, Toolbar, Typography} from "@material-ui/core";
 import {Menu} from "@material-ui/icons";
 import {todolistsReducer} from "./state/todolist-reducer";
-import {tasksReducer} from "./state/task-reducer";
+import {removeTaskAC, tasksReducer} from "./state/task-reducer";
 
 
 export type TodolistType = {
@@ -24,12 +24,8 @@ export type TasksStateType = {
 
 export const AppWithReducer = () => {
 
-    const changeStatus = (todolistID: string, taskId: string, isDone: boolean) => {
-        setTasks({...tasks, [todolistID]: tasks[todolistID].map(el => el.id === taskId ? {...el, isDone: isDone} : el)})
-    };
-
     const removeTask = (todolistID: string, id: string) => {
-        setTasks({...tasks, [todolistID]: tasks[todolistID].filter(el => el.id !== id)})
+        dispatchToTasksReducer(removeTaskAC(todolistID, id));
     };
 
     const addTask = (todolistID: string, title: string) => {
@@ -40,6 +36,11 @@ export const AppWithReducer = () => {
     const changeTaskTitle = (todolistId: string, id: string, newValue: string) => {
         setTasks({...tasks, [todolistId]: tasks[todolistId].map(el => el.id === id ? {...el, title: newValue} : el)})
     };
+
+    const changeStatus = (todolistID: string, taskId: string, isDone: boolean) => {
+        setTasks({...tasks, [todolistID]: tasks[todolistID].map(el => el.id === taskId ? {...el, isDone: isDone} : el)})
+    };
+
 
     const changeFilter = (todolistID: string, value: FilterValueType) => {
         setTodolist(todolists.map(el => el.id === todolistID ? {...el, filter: value} : el))
