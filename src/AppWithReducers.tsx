@@ -5,7 +5,7 @@ import {v1} from "uuid";
 import {AddItemForm} from "./Component/AddItemForm/AddItemForm";
 import {AppBar, Button, IconButton, Toolbar, Typography} from "@material-ui/core";
 import {Menu} from "@material-ui/icons";
-import {changeTodolistFilterAC, todolistsReducer} from "./state/todolists-reducer";
+import {changeTodolistFilterAC, changeTodolistTitleAC, todolistsReducer} from "./state/todolists-reducer";
 import {addTaskAC, changeTaskStatusAC, changeTaskTitleAC, removeTasksAC, tasksReducer} from "./state/tasks-reducer";
 
 
@@ -23,7 +23,8 @@ export type TaskStateType = {
 export const AppWithReducers = () => {
 
     const changeTodolistTitle = (id: string, newTitle: string) => {
-        setTodolist(todolists.map(el => el.id === id ? {...el, title: newTitle} : el))
+        const action= changeTodolistTitleAC(id,newTitle);
+        dispatchTodolistsReducer(action)
     }
 
     const changeTaskTitle = (todolistId: string, taskId: string, newTitle: string) => {
