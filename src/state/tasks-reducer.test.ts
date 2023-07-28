@@ -74,7 +74,7 @@ test('status of specified task should be changed', () => {
         ]
     }
 
-    const action = changeTaskStatusAC('todolistId2', '2', false,)
+    const action = changeTaskStatusAC('todolistId2', '2', false)
 
     const endState = tasksReducer(startState, action)
 
