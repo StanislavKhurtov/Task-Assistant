@@ -36,4 +36,15 @@
 
 //==========================================================
 
-//lesson10 - Reducer
+//lesson #10 - useReducer, redux
+ Reducers - React
+- Redux
+- createStore
+- combineReducers
+- AppRootStateType
+- Provider from react-redux
+- return state default
+- initialState
+- useDispatch react-redux
+- useSelector react-redux
+- задание for Advanced Level  
