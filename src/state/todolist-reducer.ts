@@ -36,13 +36,8 @@ type ActionType =
     | ChangeTodolistTitleActionType
     | ChangeTodolistFilterActionType;
 
-export const todolistId_1 = v1();
-export const todolistId_2 = v1();
+const initialState: Array<TodolistType> = []
 
-const initialState: Array<TodolistType> = [
-    {id: todolistId_1, title: 'What to learn', filter: "all"},
-    {id: todolistId_2, title: 'What to buy', filter: "all"},
-]
 export const todolistsReducer = (state: Array<TodolistType> = initialState, action: ActionType): Array<TodolistType> => {
     switch (action.type) {
         case 'REMOVE-TODOLIST':
