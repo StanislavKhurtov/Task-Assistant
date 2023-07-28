@@ -5,7 +5,7 @@ import {v1} from "uuid";
 import {AddItemForm} from "./Component/AddItemForm/AddItemForm";
 import {AppBar, Button, IconButton, Toolbar, Typography} from "@material-ui/core";
 import {Menu} from "@material-ui/icons";
-import {todolistsReducer} from "./state/todolists-reducer";
+import {changeTodolistFilterAC, todolistsReducer} from "./state/todolists-reducer";
 import {addTaskAC, removeTasksAC, tasksReducer} from "./state/tasks-reducer";
 
 
@@ -48,7 +48,8 @@ export const AppWithReducers = () => {
     };
 
     const changeFilter = (todolistID: string, value: FilterValuesType) => {
-        setTodolist(todolists.map(el => el.id === todolistID ? {...el, filter: value} : el))
+        const action = changeTodolistFilterAC(todolistID,value);
+        dispatchTodolistsReducer(action);
     };
 
     const removeTodolist = (todolistId: string) => {
