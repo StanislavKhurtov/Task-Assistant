@@ -1,21 +1,43 @@
-\\ Todolist for student
+Todolist for student
 
 //==========================================================
-// lesson1
+
+lesson1
+
+
 //==========================================================
-// lesson2
+
+ lesson2
+
+
 //==========================================================
-// lesson3
+
+lesson3
+
+
 //==========================================================
-// lesson4
+
+lesson4
+
+
 //==========================================================
-// lesson5
+
+ lesson5
+
+
 //==========================================================
-// lesson6
+
+ lesson6
+
+
 //==========================================================
-// lesson7
+
+lesson7
+
+
 //==========================================================
-// lesson#08 - Todolist for student (reducer, unit test)
+
+lesson#08 - Todolist for student (reducer, unit test)
 
 -- как работает reducer –
 – начало. игрушечные тесты
@@ -29,14 +51,16 @@
 – debugger
 
 //==========================================================
-// lesson№ 09 - Todolist for student 09 (reducer for tasks, unit test)
+
+lesson#09 - Todolist for student 09 (reducer for tasks, unit test)
 – начало
 – тесты
 – white board
 
 //==========================================================
 
-//lesson #10 - useReducer, redux
+lesson#10 - useReducer, redux
+
  Reducers - React
 - Redux
 - createStore
@@ -48,3 +72,7 @@
 - useDispatch react-redux
 - useSelector react-redux
 - задание for Advanced Level  
+
+//==========================================================
+
+lesson#11
