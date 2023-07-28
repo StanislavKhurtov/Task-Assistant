@@ -6,7 +6,7 @@ import {AddItemForm} from "./Component/AddItemForm/AddItemForm";
 import {AppBar, Button, IconButton, Toolbar, Typography} from "@material-ui/core";
 import {Menu} from "@material-ui/icons";
 import {todolistsReducer} from "./state/todolists-reducer";
-import {tasksReducer} from "./state/tasks-reducer";
+import {removeTasksAC, tasksReducer} from "./state/tasks-reducer";
 
 
 export type FilterValuesType = "all" | "active" | "completed";
@@ -38,7 +38,8 @@ export const AppWithReducers = () => {
     };
 
     const removeTask = (id: string, todolistId: string) => {
-        setTasks({...tasks, [todolistId]: tasks[todolistId].filter(el => el.id !== id)})
+        const action = removeTasksAC(id,todolistId);
+        dispatchTasksReducer(action)
     };
 
     const addTask = (todolistId: string, title: string) => {
