@@ -6,6 +6,7 @@ import {AddItemForm} from "./AddItemForm";
 import {AppBar, Button, Container, Grid, IconButton, Paper, Toolbar, Typography} from "@material-ui/core";
 import {Menu} from "@material-ui/icons";
 import {todolistsReducer} from "./state/todolist-reducer";
+import {tasksReducer} from "./state/task-reducer";
 
 
 export type TodolistType = {
@@ -68,7 +69,7 @@ export const AppWithReducer = () => {
         {id: todolistId_2, title: 'What to buy', filter: "all"},
     ]);
 
-    let [tasks, setTasks] = useState<TasksStateType>({
+    let [tasks, dispatchToTasksReducer] = useReducer(tasksReducer,{
         [todolistId_1]: [
             {id: v1(), title: 'HTML&CSS', isDone: true},
             {id: v1(), title: 'JavaScript', isDone: true},
