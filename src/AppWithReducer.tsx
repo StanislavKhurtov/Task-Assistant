@@ -1,10 +1,11 @@
-import React, {useState} from 'react';
+import React, {useReducer, useState} from 'react';
 import './App.css';
 import {TaskType, Todolist} from "./Todolist";
 import {v1} from "uuid";
 import {AddItemForm} from "./AddItemForm";
 import {AppBar, Button, Container, Grid, IconButton, Paper, Toolbar, Typography} from "@material-ui/core";
 import {Menu} from "@material-ui/icons";
+import {todolistsReducer} from "./state/todolist-reducer";
 
 
 export type TodolistType = {
@@ -62,7 +63,7 @@ export const AppWithReducer = () => {
     const todolistId_1 = v1();
     const todolistId_2 = v1();
 
-    let [todolists, setTodolist] = useState<Array<TodolistType>>([
+    let [todolists, dispatchToTodolistReducer] = useReducer(todolistsReducer,[
         {id: todolistId_1, title: 'What to learn', filter: "all"},
         {id: todolistId_2, title: 'What to buy', filter: "all"},
     ]);
