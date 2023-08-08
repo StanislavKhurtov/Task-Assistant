@@ -58,7 +58,6 @@ export const Todolist = React.memo((props: TodolistType) => {
         taskForTodolist = props.tasks.filter(el => el.isDone === true)
     }
 
-
     return (
         <div className={'todolist'}>
             <div className="todolistBody">

@@ -86,3 +86,13 @@ lesson#11 - Todolist for student (useCallback, React.memo, immutability)
  - второй параметр в useCallback зависимости 
 
 //==========================================================//
+
+lesson12 - Todolist for student (storybook, decorator, snapshot testing)
+ — начало
+ – история для Task
+ – декоратор
+ – addons
+ – snapshot testing теория
+ – snapshot testing практика
+
+//==========================================================//
