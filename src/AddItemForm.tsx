@@ -1,17 +1,17 @@
-import React, {ChangeEvent, KeyboardEvent, useState} from "react";
-import {Button, IconButton, TextField} from "@material-ui/core";
+import React, {ChangeEvent, KeyboardEvent, useCallback, useState} from "react";
+import {IconButton, TextField} from "@material-ui/core";
 import {AddBox} from "@material-ui/icons";
 
 type AddItemFormPropsType = {
     addItem: (newTitle: string) => void
 }
 
-export const AddItemForm = (props: AddItemFormPropsType) => {
-
+export const AddItemForm = React.memo((props: AddItemFormPropsType) => {
+    console.log('AddItemForm call')
     let [newTitle, setNewTitle] = useState("")
     let [error, setError] = useState<string | null>(null)
 
-    const addTask = () => {
+    const addTask = useCallback(() => {
         if (newTitle.trim() !== "") {
             props.addItem(newTitle.trim())
             setNewTitle("")
@@ -19,10 +19,12 @@ export const AddItemForm = (props: AddItemFormPropsType) => {
             setError("Title is requared");
         }
 
-    };
+    },[props.addItem]);
 
     const onKeyPressHandler = (e: KeyboardEvent<HTMLInputElement>) => {
-        setError(null)
+        if(error !== null) {
+            setError(null)
+        }
         if (newTitle.trim() !== "") {
             if (e.key === "Enter") {
                 props.addItem(newTitle.trim())
@@ -51,4 +53,4 @@ export const AddItemForm = (props: AddItemFormPropsType) => {
             </IconButton>
         </div>
     );
-}
+})
