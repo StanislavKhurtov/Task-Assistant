@@ -28,12 +28,12 @@ export type TasksStateType = {
 }
 
 
-export const AppWithRedux = () => {
-
-    const dispatch = useDispatch();
+export const AppWithRedux = React.memo(() => {
 
     const todolists = useSelector<AppRootState,Array<TodolistType>>(state => state.todolists);
     const tasks = useSelector<AppRootState,TasksStateType>(state => state.tasks);
+
+    const dispatch = useDispatch();
 
     const removeTask = useCallback((todolistID: string, id: string) => {
         dispatch(removeTaskAC(todolistID, id));
@@ -87,7 +87,8 @@ export const AppWithRedux = () => {
                 <Grid container gap={10}>
                     {todolists.map((el) => {
 
-                        let taskForTodolist = tasks[el.id];
+                        let allForTodolist = tasks[el.id];
+                        let taskForTodolist = allForTodolist;
 
                         return (
                             <div>
@@ -116,4 +117,4 @@ export const AppWithRedux = () => {
             </Container>
         </div>
     );
-}
+})
