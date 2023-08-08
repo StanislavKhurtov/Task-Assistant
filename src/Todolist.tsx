@@ -1,4 +1,4 @@
-import React, {ChangeEvent} from "react";
+import React, {ChangeEvent, useCallback} from "react";
 import {FilterValueType} from "./App";
 import {AddItemForm} from "./AddItemForm";
 import {EditebleSpan} from "./EditebleSpan";
@@ -30,25 +30,25 @@ export type TaskType = {
 
 export const Todolist = React.memo((props: TodolistType) => {
 
-    const onAllClickHandler = () => props.changeFilter(props.id, 'all');
+    const onAllClickHandler = useCallback(() => props.changeFilter(props.id, 'all'), [props.changeFilter, props.id]);
 
-    const onActiveClickHandler = () => props.changeFilter(props.id, 'active');
+    const onActiveClickHandler = useCallback(() => props.changeFilter(props.id, 'active'), [props.changeFilter, props.id]);
 
-    const onCompletedClickHandler = () => props.changeFilter(props.id, 'completed');
+    const onCompletedClickHandler = useCallback(() => props.changeFilter(props.id, 'completed'), [props.changeFilter, props.id]);
 
     const removeTodolist = () => {
         props.removeTodolist(props.id)
     };
 
-    const addTask = (newTitle: string) => {
+    const addTask = useCallback((newTitle: string) => {
         props.addTask(props.id, newTitle)
-    };
+    }, [props.addTask, props.id]);
 
     const changeTodolistTitle = (newTitle: string) => {
         props.changeTodolistTitle(props.id, newTitle)
     }
 
-   let taskForTodolist = props.tasks;
+    let taskForTodolist = props.tasks;
 
     if (props.filter === 'completed') {
         taskForTodolist = taskForTodolist.filter(el => el.isDone === true)

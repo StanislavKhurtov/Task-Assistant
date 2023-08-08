@@ -8,18 +8,18 @@ type AddItemFormPropsType = {
 
 export const AddItemForm = React.memo((props: AddItemFormPropsType) => {
     console.log('AddItemForm call')
+
     let [newTitle, setNewTitle] = useState("")
     let [error, setError] = useState<string | null>(null)
 
-    const addTask = useCallback(() => {
+    const addItem = () => {
         if (newTitle.trim() !== "") {
             props.addItem(newTitle.trim())
             setNewTitle("")
         } else {
             setError("Title is requared");
         }
-
-    },[props.addItem]);
+    };
 
     const onKeyPressHandler = (e: KeyboardEvent<HTMLInputElement>) => {
         if(error !== null) {
@@ -30,8 +30,6 @@ export const AddItemForm = React.memo((props: AddItemFormPropsType) => {
                 props.addItem(newTitle.trim())
                 setNewTitle("")
             }
-        } else {
-            setError("Title is requared");
         }
     };
 
@@ -48,7 +46,7 @@ export const AddItemForm = React.memo((props: AddItemFormPropsType) => {
                 error={!!error}
                 helperText={error}
             />
-            <IconButton onClick={addTask} color={'primary'}>
+            <IconButton onClick={addItem} color={'primary'}>
                 <AddBox />
             </IconButton>
         </div>
