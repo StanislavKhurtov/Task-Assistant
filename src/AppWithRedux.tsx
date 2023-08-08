@@ -89,14 +89,6 @@ export const AppWithRedux = () => {
 
                         let taskForTodolist = tasks[el.id];
 
-                        if (el.filter === 'completed') {
-                            taskForTodolist = taskForTodolist.filter(el => el.isDone === true)
-                        }
-
-                        if (el.filter === 'active') {
-                            taskForTodolist = taskForTodolist.filter(el => el.isDone === false)
-                        }
-
                         return (
                             <div>
                                 <Grid item>
