@@ -1,6 +1,5 @@
 import React from "react";
 
-import {Task} from "./Task";
 import {action} from "@storybook/addon-actions";
 import {EditebleSpan} from "./EditebleSpan";
 
