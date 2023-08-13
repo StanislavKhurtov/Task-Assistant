@@ -96,3 +96,20 @@ lesson12 - Todolist for student (storybook, decorator, snapshot testing)
  – snapshot testing практика
 
 //==========================================================//
+
+lesson13 - 01 - Todolist for student (api, axios, rest api)
+- введение
+- теория (Rest API)
+ - разбираем API todolists
+ - подготовка для запроса тасок
+ - про статус коды, Postman, JSON
+ - создаем историю с запросами
+ - get запрос todolists
+ - post запрос
+ - delete todolist
+ - update todolist
+ - рефакторинг
+ - типизация
+ - tasks API
+
+//==========================================================//
