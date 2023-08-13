@@ -1,24 +1,24 @@
+import {Meta, StoryObj} from "@storybook/react";
 import React from "react";
-
 import {action} from "@storybook/addon-actions";
 import {EditebleSpan} from "./EditebleSpan";
 
+const meta: Meta<typeof EditebleSpan> = {
+    title: 'TODOLISTS/EditebleSpan',
+    component: EditebleSpan,
+    tags: ['autodocs'],
+    args: {
+        title: 'Вводи Клик',
+        onChange: action( "onChange")
+    },
+};
 
-export default {
-    title: 'EditebleSpan Component',
-    component: EditebleSpan
-}
+export default meta;
+type Story = StoryObj<typeof EditebleSpan>;
 
-//const callback = action('Button "add" was pressed inside the form')
 
-const changeCallback  = action('Value changed')
+export const EditebleSpanStory: Story = {}
 
 
 
-export const EditebleSpanBaseExample = () => {
-    return (
-        <>
-      <EditebleSpan title={'Start value'} onChange={changeCallback} />
-        </>
-    )
-}
+
