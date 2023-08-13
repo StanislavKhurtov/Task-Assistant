@@ -1,38 +1,45 @@
+import {Meta, StoryObj} from "@storybook/react";
 import React from "react";
-
+import {v1} from "uuid";
 import {Task} from "./Task";
-import {action} from "@storybook/addon-actions";
+
+const meta: Meta<typeof Task> = {
+    title: 'TODOLISTS/Task',
+    component: Task,
+    tags: ['autodocs'],
+    args: {
+        // changeStatus: action('changeStatus'),
+        // changeTaskTitle: action('changeTaskTitle'),
+        // removeTask: action('remove task'),
+        task: {id: v1(), title: "JS", isDone: true},
+        todolistId: v1()
+    },
+    argTypes: {
+        changeStatus: {
+            description: 'qeewreg',
+            action: 'clicked'
+        },
+        changeTaskTitle: {
+            description: 'qeewreg',
+            action: 'clicked'
+        },
+        removeTask: {
+            description: 'qeewreg',
+            action: 'clicked'
+        },
+    }
+};
+
+export default meta;
+type Story = StoryObj<typeof Task>;
 
 
-export default {
-    title: 'Task Component',
-    component: Task
+export const TaskIsDoneStory: Story = {}
+
+export const TaskIsNotDoneStory: Story = {
+    args: {
+        task: {id: v1(), title: "CSS", isDone: false},
+    }
 }
 
-//const callback = action('Button "add" was pressed inside the form')
 
-const changeTaskStatusCallback  = action('Status changed')
-const changeTaskTitleCallback  = action('Title changed')
-const removeTaskCallback  = action('Task removed')
-
-
-export const TaskBaseExample = () => {
-    return (
-        <>
-            <Task
-                changeStatus={changeTaskStatusCallback}
-                changeTaskTitle={changeTaskTitleCallback}
-                removeTask={removeTaskCallback}
-                task={{id:'1',isDone:true, title: 'CSS'}}
-                todolistId={'todolistId1'}
-            />
-            <Task
-                changeStatus={changeTaskStatusCallback}
-                changeTaskTitle={changeTaskTitleCallback}
-                removeTask={removeTaskCallback}
-                task={{id:'2',isDone:false, title: 'JS'}}
-                todolistId={'todolistId2'}
-            />
-        </>
-    )
-}
