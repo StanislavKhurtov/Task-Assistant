@@ -19,7 +19,6 @@ export const GetTodolist = () => {
         // который в виде строки будем отображать в div-ке
         axios.get('https://social-network.samuraijs.com/api/1.1/todo-lists',settings)
             .then((res) => {
-
                 setState( res.data)
             })
 
@@ -41,6 +40,10 @@ export const CreateTodolist = () => {
 export const DeleteTodolist = () => {
     const [state, setState] = useState<any>(null)
     useEffect(() => {
+        axios.delete('https://social-network.samuraijs.com/api/1.1/todo-lists/0a7373fb-9b86-4de6-b240-90b4a67696a1',settings)
+            .then((res) => {
+                setState( res.data)
+            })
     }, [])
 
     return <div>{JSON.stringify(state)}</div>
