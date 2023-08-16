@@ -7,6 +7,13 @@ const settings = {
     },
 }
 
+export type TodolistType = {
+    id: string,
+    title:string,
+    addedDate:string,
+    order:number
+}
+
 export const todolistAPI = {
     getTodolists() {
         const promise = axios.get(
