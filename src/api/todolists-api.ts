@@ -14,20 +14,39 @@ export type TodolistType = {
     order:number
 }
 
+type CreateTodolistResponseType = {
+    resultCode: number
+    messages: Array<string>
+    fieldsErrors: Array<string>
+    data: {
+        item: TodolistType
+    }
+}
+
+type DeleteTodolistResponseType = {
+    resultCode: number
+    messages: Array<string>
+    fieldsErrors: Array<string>
+    data: {}
+}
+
+
+
+
 export const todolistAPI = {
     getTodolists() {
-        const promise = axios.get(
+        const promise = axios.get<Array<TodolistType>>(
             `https://social-network.samuraijs.com/api/1.1/todo-lists/`,
             settings
         )
         return promise
     },
     createTodolists(title: string) {
-        const promise = axios.post('https://social-network.samuraijs.com/api/1.1/todo-lists', {title: title}, settings)
+        const promise = axios.post<CreateTodolistResponseType>('https://social-network.samuraijs.com/api/1.1/todo-lists', {title: title}, settings)
         return promise
     },
     deleteTodolists(id: string) {
-        const promise = axios.delete(`https://social-network.samuraijs.com/api/1.1/todo-lists/${id}`, settings)
+        const promise = axios.delete<DeleteTodolistResponseType>(`https://social-network.samuraijs.com/api/1.1/todo-lists/${id}`, settings)
         return promise
     },
     updateTodolistsTitle(id: string, title:string) {
