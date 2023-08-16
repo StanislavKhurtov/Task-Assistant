@@ -28,5 +28,4 @@ export const todolistAPI = {
         const promise = axios.put(`https://social-network.samuraijs.com/api/1.1/todo-lists/${id}`, {title: title}, settings)
         return promise
     }
-
 }
