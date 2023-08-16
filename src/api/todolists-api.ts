@@ -53,12 +53,12 @@ export type GetTasksResponse = {
 
 export const todolistAPI = {
     getTodolists() {
-        const promise = instance.get<TodolistType[]>(`todo-lists`);
-        return promise;
+        return instance.get<TodolistType[]>(`todo-lists`);
+
     },
     createTodolists(title: string) {
-        const promise = instance.post<ResponseType<CreateType>>('todo-lists',{title: title});
-        return promise;
+        return instance.post<ResponseType<CreateType>>('todo-lists', {title: title});
+
     },
     deleteTodolists(id: string) {
         const promise = instance.delete<ResponseType<{}>>(`todo-lists/${id}`);
@@ -71,5 +71,8 @@ export const todolistAPI = {
     getTasks(id: string) {
         const promise = instance.get<GetTasksResponse>(`todo-lists/${id}/tasks`);
         return promise;
+    },
+    deleteTasks(todolistId: string, taskId: string) {
+        return instance.delete<GetTasksResponse>(`todo-lists/${todolistId}/tasks/${taskId}`);
     }
 }
