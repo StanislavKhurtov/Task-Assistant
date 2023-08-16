@@ -23,7 +23,7 @@ export type CreateType = {
     item: TodolistType
 }
 
-export type ResponseType<D> = {
+export type ResponseType<D = {}> = {
     resultCode: number
     messages: Array<string>
     fieldsErrors: Array<string>
@@ -51,6 +51,8 @@ export type GetTasksResponse = {
 }
 
 
+
+
 export const todolistAPI = {
     getTodolists() {
         return instance.get<TodolistType[]>(`todo-lists`);
@@ -61,11 +63,11 @@ export const todolistAPI = {
 
     },
     deleteTodolists(id: string) {
-        const promise = instance.delete<ResponseType<{}>>(`todo-lists/${id}`);
+        const promise = instance.delete<ResponseType>(`todo-lists/${id}`);
         return promise;
     },
     updateTodolistsTitle(id: string, title: string) {
-        const promise = instance.put<ResponseType<{}>>(`todo-lists/${id}`, {title: title});
+        const promise = instance.put<ResponseType>(`todo-lists/${id}`, {title: title});
         return promise;
     },
     getTasks(id: string) {
@@ -73,6 +75,6 @@ export const todolistAPI = {
         return promise;
     },
     deleteTasks(todolistId: string, taskId: string) {
-        return instance.delete<GetTasksResponse>(`todo-lists/${todolistId}/tasks/${taskId}`);
+        return instance.delete<ResponseType>(`todo-lists/${todolistId}/tasks/${taskId}`);
     }
 }
