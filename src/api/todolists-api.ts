@@ -45,5 +45,12 @@ export const todolistAPI = {
     updateTodolistsTitle(id: string, title:string) {
         const promise = axios.put<ResponseType<{}>>(`https://social-network.samuraijs.com/api/1.1/todo-lists/${id}`, {title: title}, settings)
         return promise
+    },
+    getTasks(id: string) {
+        const promise = axios.get<TodolistType[]>(
+            `https://social-network.samuraijs.com/api/1.1/todo-lists/${id}/tasks`,
+            settings
+        )
+        return promise
     }
 }
