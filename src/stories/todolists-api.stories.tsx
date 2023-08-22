@@ -32,14 +32,23 @@ export const CreateTodolist = () => {
 
 export const DeleteTodolist = () => {
     const [state, setState] = useState<any>(null)
-    useEffect(() => {
-        todolistAPI.deleteTodolist('c4790217-bb47-4dbe-a20e-6f1cc796c810')
+    const [todolistId, setTodolistId] = useState<string>('')
+
+    const deleteTodolist = () => {
+        todolistAPI.deleteTodolist(`${todolistId}`)
             .then(res => {
                 setState(res.data)
             })
-    }, [])
+    }
 
-    return <div>{JSON.stringify(state)}</div>
+    const onChangeTodolistId = (e: ChangeEvent<HTMLInputElement>) => {
+        setTodolistId(e.currentTarget.value)
+    }
+
+    return <div>{JSON.stringify(state)}
+        <input type="text" placeholder={'todolistId'} onChange={onChangeTodolistId} />
+        <button onClick={deleteTodolist}>delete task</button>
+    </div>
 }
 
 export const UpdateTodolistTitle = () => {
