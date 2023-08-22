@@ -20,14 +20,23 @@ export const GetTodolist = () => {
 
 export const CreateTodolist = () => {
     const [state, setState] = useState<any>(null)
-    useEffect(() => {
-        todolistAPI.createTodolist('New Todo')
+    const [title, setTitle] = useState<string>('')
+
+    const createTodolist = () => {
+        todolistAPI.createTodolist(`${title}`)
             .then(res => {
                 setState(res.data)
             })
-    }, [])
+    }
 
-    return <div>{JSON.stringify(state)}</div>
+    const onChangeHandler = (e: ChangeEvent<HTMLInputElement>) => {
+        setTitle(e.currentTarget.value)
+    }
+
+    return <div>{JSON.stringify(state)}
+        <input type="text" placeholder={'New Title'} onChange={onChangeHandler} />
+        <button onClick={createTodolist}>create task</button>
+    </div>
 }
 
 export const DeleteTodolist = () => {
