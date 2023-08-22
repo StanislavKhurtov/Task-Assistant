@@ -14,6 +14,27 @@ export type ResponseType<D = {}> = {
     data: D
 }
 
+
+export type TaskType = {
+    description: string
+    title: string
+    completed: boolean
+    status: number
+    priority: number
+    startDate: string
+    deadline: string
+    id: string
+    todoListId: string
+    order: number
+    addedDate: string
+}
+
+type GetTasksResponse = {
+    items: TaskType[]
+    totalCount: number
+    error: string | null
+}
+
 export const settings = {
     withCredentials: true,
 }
@@ -37,16 +58,16 @@ export const todolistAPI = {
         return instance.put<ResponseType>(`todo-lists/${todolistId}`, {title: title})
     },
     getTask(todolistId: string) {
-        return instance.get(`todo-lists/${todolistId}/tasks`)
+        return instance.get<GetTasksResponse>(`todo-lists/${todolistId}/tasks`)
     },
     createTask(todolistId: string, title: string) {
-        return instance.post(`todo-lists/${todolistId}/tasks`, {title: title})
+        return instance.post<ResponseType<{item: TaskType}>>(`todo-lists/${todolistId}/tasks`, {title: title})
     },
     deleteTask(todolistId: string, taskId: string) {
-        return instance.delete(`todo-lists/${todolistId}/tasks/${taskId}`)
+        return instance.delete<ResponseType>(`todo-lists/${todolistId}/tasks/${taskId}`)
     },
     updateTask(todolistId: string, taskId: string, title: string) {
-        return instance.put(`todo-lists/${todolistId}/tasks/${taskId}`, {title: title})
+        return instance.put<ResponseType<{item: TaskType}>>(`todo-lists/${todolistId}/tasks/${taskId}`, {title: title})
     },
 
 
