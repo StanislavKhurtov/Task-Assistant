@@ -18,7 +18,6 @@ export type ResponseType<D = {}> = {
 export type TaskType = {
     description: string
     title: string
-    completed: boolean
     status: number
     priority: number
     startDate: string
@@ -33,6 +32,15 @@ type GetTasksResponse = {
     items: TaskType[]
     totalCount: number
     error: string | null
+}
+
+export type UpdateTaskType = {
+    title: string
+    description: string
+    status: number
+    priority: number
+    startDate: string
+    deadline: string
 }
 
 export const settings = {
