@@ -1,4 +1,4 @@
-import React, {useEffect, useState} from 'react'
+import React, {ChangeEvent, useEffect, useState} from 'react'
 import {todolistAPI} from "../api/todolist-api";
 
 export default {
@@ -82,14 +82,30 @@ export const CreateTask = () => {
 
 export const DeleteTask = () => {
     const [state, setState] = useState<any>(null)
-    useEffect(() => {
-        todolistAPI.deleteTask('511679e0-d6d3-4f3c-9081-f800f0c25ca7', '80196b80-459c-4036-a201-cc244d00557e')
+    const [todolistId, setTodolistId] = useState<string>('')
+    const [taskId, setTaskId] = useState<string>('')
+
+    const deleteTask = () => {
+        todolistAPI.deleteTask(`${todolistId}`, `${taskId}`)
             .then(res => {
                 setState(res.data)
             })
-    }, [])
+    }
+    const onChangeTodolistId = (e: ChangeEvent<HTMLInputElement>) => {
+        setTodolistId(e.currentTarget.value)
+    }
 
-    return <div>{JSON.stringify(state)}</div>
+    const onChangeTaskId = (e: ChangeEvent<HTMLInputElement>) => {
+        setTaskId(e.currentTarget.value)
+    }
+
+    return <div>{JSON.stringify(state)}
+        <div>
+            <input type="text" placeholder={'todolistId'} onChange={onChangeTodolistId} />
+            <input type="text" placeholder={'taskId'} onChange={onChangeTaskId} />
+            <button onClick={deleteTask}>delete task</button>
+        </div>
+    </div>
 }
 
 export const UpdateTask = () => {
