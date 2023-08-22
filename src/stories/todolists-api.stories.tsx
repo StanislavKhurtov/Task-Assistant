@@ -9,13 +9,16 @@ export const GetTodolist = () => {
 
     const [state, setState] = useState<any>(null)
 
-    useEffect(() => {
+    const getTodolist = () => {
         todolistAPI.getTodolist()
             .then(res => {
                 setState(res.data)
             })
-    }, [])
-    return <div>{JSON.stringify(state)}</div>
+    }
+
+    return <div>{JSON.stringify(state)}
+        <button onClick={getTodolist}>Get Todolist</button>
+    </div>
 }
 
 export const CreateTodolist = () => {
@@ -35,7 +38,7 @@ export const CreateTodolist = () => {
 
     return <div>{JSON.stringify(state)}
         <input type="text" placeholder={'New Title'} onChange={onChangeHandler}/>
-        <button onClick={createTodolist}>create task</button>
+        <button onClick={createTodolist}>Create Todolist</button>
     </div>
 }
 
@@ -78,7 +81,7 @@ export const GetTask = () => {
     const [state, setState] = useState<any>(null)
     const [todolistId, setTodolistId] = useState<string>('')
 
-    const getTask =() => {
+    const getTask = () => {
         todolistAPI.getTask(`${todolistId}`)
             .then(res => {
                 setState(res.data)
