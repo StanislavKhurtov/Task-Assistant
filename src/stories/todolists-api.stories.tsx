@@ -5,9 +5,6 @@ import {todolistAPI} from "../api/todolist-api";
 export default {
     title: 'API'
 }
-const settings = {
-    withCredentials: true,
-}
 
 export const GetTodolist = () => {
 
@@ -37,7 +34,7 @@ export const CreateTodolist = () => {
 export const DeleteTodolist = () => {
     const [state, setState] = useState<any>(null)
     useEffect(() => {
-      todolistAPI.deleteTodolist('d1138c1d-4dea-4660-8e2d-aa5d5691e27c')
+      todolistAPI.deleteTodolist('c4790217-bb47-4dbe-a20e-6f1cc796c810')
             .then(res => {
                 setState(res.data)
             })
@@ -57,4 +54,6 @@ export const UpdateTodolistTitle = () => {
 
     return <div>{JSON.stringify(state)}</div>
 }
+
+
 
