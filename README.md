@@ -8,11 +8,11 @@ lesson#01 - Todolist for students
 //==========================================================//
 
  lesson#02 - Todolist for students
-- метод "map"
-- удаление задач
-- функция для удаления задачи
-- фильтрация массива с task'ами
-- Local State (useState)
+ - метод "map"
+ - удаление задач
+ - функция для удаления задачи
+ - фильтрация массива с task'ами
+ - Local State (useState)
  - фильтрация задач (all | active | completed)
  - ИТОГ
 
@@ -33,57 +33,57 @@ lesson#03 - Todolist for students
 /==========================================================//
 
 lesson#04 - Todolist for students
- – начало. активный чекбокс
- – trim()
- – title is required
- – подсветка кнопок
+ - начало. активный чекбокс
+ - trim()
+ - title is required
+ - подсветка кнопок
 
 
 //==========================================================//
 
  lesson#06 - Todolist for students
- – переиспользование input
- – обертка addTask
- – добавляем новый todolist
- – типизация tasksObj
- – редактирование span
- – EditableSpan
- – редактирование todolist name
- – debugger (как работает editable span)
- – резюме (рисовалка)
+ -  переиспользование input
+ -  обертка addTask
+ -  добавляем новый todolist
+ -  типизация tasksObj
+ -  редактирование span
+ -  EditableSpan
+ -  редактирование todolist name
+ -  debugger (как работает editable span)
+ -  резюме (рисовалка)
 
 
 //==========================================================//
 
 lesson#07 - Todolist for students (material-ui)
- – кнопки
- – инпут
- – чекбокс
- – AppBar
- – Container, grid
+ - кнопки
+ - инпут
+ - чекбокс
+ - AppBar
+ - Container, grid
 
 
 //==========================================================//
 
 lesson#08 - Todolist for student (reducer, unit test)
 
--- как работает reducer –
-– начало. игрушечные тесты
-– тесты для reducer
-– иммутабельность для редьюсера
-– TDD (test-driven development)
-– reducers for todolists
-– тесты для todolist reducers
-– типизация actions
-– action creators
-– debugger
+- как работает reducer –
+ - начало. игрушечные тесты
+ - тесты для reducer
+ - иммутабельность для редьюсера
+ - TDD (test-driven development)
+ - reducers for todolists
+ - тесты для todolist reducers
+ - типизация actions
+ - action creators
+ - debugger
 
 //==========================================================//
 
 lesson#09 - Todolist for student 09 (reducer for tasks, unit test)
-– начало
-– тесты
-– white board
+ - начало
+ - тесты
+ - white board
 
 //==========================================================//
 
@@ -116,18 +116,18 @@ lesson#11 - Todolist for student (useCallback, React.memo, immutability)
 //==========================================================//
 
 lesson12 - Todolist for student (storybook, decorator, snapshot testing)
- — начало
- – история для Task
- – декоратор
- – addons
- – snapshot testing теория
- – snapshot testing практика
+ - начало
+ - история для Task
+ - декоратор
+ - addons
+ - snapshot testing теория
+ - snapshot testing практика
 
 //==========================================================//
 
 lesson13 - 01 - Todolist for student (api, axios, rest api)
-- введение
-- теория (Rest API)
+ - введение
+ - теория (Rest API)
  - разбираем API todolists
  - подготовка для запроса тасок
  - про статус коды, Postman, JSON
