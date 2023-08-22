@@ -16,6 +16,22 @@ type CreateTodolistResponseType = {
     }
 }
 
+type DeleteTodolistResponseType = {
+    resultCode: number
+    messages: Array<string>
+    fieldsErrors: Array<string>
+    data: {}
+}
+
+type UpdateTodolistResponseType = {
+    resultCode: number
+    messages: Array<string>
+    fieldsErrors: Array<string>
+    data: {}
+}
+
+
+
 export const settings = {
     withCredentials: true,
 }
