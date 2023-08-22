@@ -34,7 +34,7 @@ export const CreateTodolist = () => {
     }
 
     return <div>{JSON.stringify(state)}
-        <input type="text" placeholder={'New Title'} onChange={onChangeHandler} />
+        <input type="text" placeholder={'New Title'} onChange={onChangeHandler}/>
         <button onClick={createTodolist}>create task</button>
     </div>
 }
@@ -55,7 +55,7 @@ export const DeleteTodolist = () => {
     }
 
     return <div>{JSON.stringify(state)}
-        <input type="text" placeholder={'todolistId'} onChange={onChangeTodolistId} />
+        <input type="text" placeholder={'todolistId'} onChange={onChangeTodolistId}/>
         <button onClick={deleteTodolist}>delete task</button>
     </div>
 }
@@ -88,14 +88,29 @@ export const GetTask = () => {
 
 export const CreateTask = () => {
     const [state, setState] = useState<any>(null)
-    useEffect(() => {
-        todolistAPI.createTask('511679e0-d6d3-4f3c-9081-f800f0c25ca7', 'New Task!!!')
+    const [todolistId, setTodolistId] = useState<string>('')
+    const [title, setTitle] = useState<string>('')
+
+    const createTask = () => {
+        todolistAPI.createTask(`${todolistId}`, `${title}`)
             .then(res => {
                 setState(res.data)
             })
-    }, [])
+    }
 
-    return <div>{JSON.stringify(state)}</div>
+    const onChangeTodolistId = (e: ChangeEvent<HTMLInputElement>) => {
+        setTodolistId(e.currentTarget.value)
+    }
+
+    const onChangeHandler = (e: ChangeEvent<HTMLInputElement>) => {
+        setTitle(e.currentTarget.value)
+    }
+
+    return <div>{JSON.stringify(state)}
+        <input type="text" placeholder={'todolistId'} onChange={onChangeTodolistId}/>
+        <input type="text" placeholder={'New Title'} onChange={onChangeHandler}/>
+        <button onClick={createTask}>create task</button>
+    </div>
 }
 
 export const DeleteTask = () => {
@@ -119,8 +134,8 @@ export const DeleteTask = () => {
 
     return <div>{JSON.stringify(state)}
         <div>
-            <input type="text" placeholder={'todolistId'} onChange={onChangeTodolistId} />
-            <input type="text" placeholder={'taskId'} onChange={onChangeTaskId} />
+            <input type="text" placeholder={'todolistId'} onChange={onChangeTodolistId}/>
+            <input type="text" placeholder={'taskId'} onChange={onChangeTaskId}/>
             <button onClick={deleteTask}>delete task</button>
         </div>
     </div>
