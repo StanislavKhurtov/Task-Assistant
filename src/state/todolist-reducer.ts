@@ -1,5 +1,6 @@
-import {FilterValueType, TodolistType} from "../App";
 import {v1} from "uuid";
+import {TodolistType} from "../api/todolist-api";
+
 
 
 export type RemoveTodolistActionType = {
@@ -26,24 +27,26 @@ export type ChangeTodolistFilterActionType = {
 };
 
 
-// меня вызовут и дадут мне стейт (почти всегда объект)
-// и инструкцию (action, тоже объект)
-// согласно прописанному type в этом action (инструкции) я поменяю state
-
 type ActionType =
     RemoveTodolistActionType
     | AddTodolistActionType
     | ChangeTodolistTitleActionType
     | ChangeTodolistFilterActionType;
 
-const initialState: Array<TodolistType> = []
+const initialState: Array<TodolistDomainType> = []
 
-export const todolistsReducer = (state: Array<TodolistType> = initialState, action: ActionType): Array<TodolistType> => {
+export type FilterValueType = 'all' | 'completed' | 'active';
+
+export type TodolistDomainType = TodolistType & {
+    filter: FilterValueType
+}
+
+export const todolistsReducer = (state: Array<TodolistDomainType> = initialState, action: ActionType): Array<TodolistDomainType> => {
     switch (action.type) {
         case 'REMOVE-TODOLIST':
             return state.filter(el => el.id !== action.id);
         case 'ADD-TODOLIST':
-            return ([...state, {id: action.todolistId, title: action.title, filter: "all"}])
+            return ([...state, {id: action.todolistId, title: action.title, filter: "all", addedDate: '', order: 0}])
         case 'CHANGE-TODOLIST-TITLE':
             return state.map(el => el.id === action.id ? {...el, title: action.title} : el);
         case 'CHANGE-TODOLIST-FILTER':
