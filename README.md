@@ -141,3 +141,15 @@ lesson13 - 01 - Todolist for student (api, axios, rest api)
  - tasks API
 
 //==========================================================//
+
+lesson1313 - 02 - Todolist for student 13 (part 2) (api, axios, rest api)
+
+//==========================================================//
+
+lesson13 - 03 - Todolist for student (миграция на новые типы (подготовка к 14 занятию))
+37:40 – Provider decorator
+45:30 – tests
+
+//==========================================================//
+
+
