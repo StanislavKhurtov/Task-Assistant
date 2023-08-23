@@ -1,27 +1,21 @@
 import React, {useCallback} from 'react';
 import './App.css';
-import {TaskType, Todolist} from "./Todolist";
+import {Todolist} from "./Todolist";
 import {AddItemForm} from "./AddItemForm";
 import {AppBar, Button, Container, Grid, IconButton, Paper, Toolbar, Typography} from "@material-ui/core";
 import {Menu} from "@material-ui/icons";
 import {
     addTodolistAC,
     changeTodolistFilterAC,
-    changeTodolistTitleAC,
-    removeTodolistAC,
+    changeTodolistTitleAC, FilterValueType,
+    removeTodolistAC, TodolistDomainType,
 } from "./state/todolist-reducer";
 import {addTaskAC, changeTaskStatusAC, changeTaskTitleAC, removeTaskAC} from "./state/task-reducer";
 import {useDispatch, useSelector} from "react-redux";
 import {AppRootState} from "./state/store";
+import {TaskStatuses, TaskType} from "./api/todolist-api";
 
 
-export type TodolistType = {
-    id: string
-    title: string
-    filter: FilterValueType
-}
-
-export type FilterValueType = 'all' | 'completed' | 'active';
 
 export type TasksStateType = {
     [key: string]: Array<TaskType>
@@ -30,7 +24,7 @@ export type TasksStateType = {
 
 export const AppWithRedux = React.memo(() => {
 
-    const todolists = useSelector<AppRootState,Array<TodolistType>>(state => state.todolists);
+    const todolists = useSelector<AppRootState,Array<TodolistDomainType>>(state => state.todolists);
     const tasks = useSelector<AppRootState,TasksStateType>(state => state.tasks);
 
     const dispatch = useDispatch();
@@ -47,8 +41,8 @@ export const AppWithRedux = React.memo(() => {
         dispatch(changeTaskTitleAC(todolistId, id, newValue));
     },[dispatch]);
 
-    const changeStatus = useCallback((todolistID: string, taskId: string, isDone: boolean) => {
-        dispatch(changeTaskStatusAC(todolistID, taskId, isDone));
+    const changeStatus = useCallback((todolistID: string, taskId: string, status: TaskStatuses) => {
+        dispatch(changeTaskStatusAC(todolistID, taskId, status));
     },[dispatch]);
 
     const changeFilter = useCallback((todolistID: string, value: FilterValueType) => {
