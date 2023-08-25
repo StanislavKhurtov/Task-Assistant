@@ -2,7 +2,6 @@ import {v1} from "uuid";
 import {TodolistType} from "../api/todolist-api";
 
 
-
 export type RemoveTodolistActionType = {
     type: 'REMOVE-TODOLIST'
     id: string
@@ -26,12 +25,15 @@ export type ChangeTodolistFilterActionType = {
     filter: FilterValueType
 };
 
+export type _SetTodolistsType = ReturnType<typeof setTodolistsAC>
+
 
 type ActionType =
     RemoveTodolistActionType
     | AddTodolistActionType
     | ChangeTodolistTitleActionType
-    | ChangeTodolistFilterActionType;
+    | ChangeTodolistFilterActionType
+    | _SetTodolistsType;
 
 const initialState: Array<TodolistDomainType> = []
 
@@ -43,14 +45,24 @@ export type TodolistDomainType = TodolistType & {
 
 export const todolistsReducer = (state: Array<TodolistDomainType> = initialState, action: ActionType): Array<TodolistDomainType> => {
     switch (action.type) {
-        case 'REMOVE-TODOLIST':
+        case 'SET-TODOLISTS': {
+            return action.todolists.map(tl => ({
+                ...tl,
+                filter: 'all'
+            }))
+        }
+        case 'REMOVE-TODOLIST': {
             return state.filter(el => el.id !== action.id);
-        case 'ADD-TODOLIST':
+        }
+        case 'ADD-TODOLIST': {
             return ([...state, {id: action.todolistId, title: action.title, filter: "all", addedDate: '', order: 0}])
-        case 'CHANGE-TODOLIST-TITLE':
+        }
+        case 'CHANGE-TODOLIST-TITLE': {
             return state.map(el => el.id === action.id ? {...el, title: action.title} : el);
-        case 'CHANGE-TODOLIST-FILTER':
+        }
+        case 'CHANGE-TODOLIST-FILTER': {
             return state.map(el => el.id === action.id ? {...el, filter: action.filter} : el);
+        }
         default:
             return state;
     }
@@ -72,3 +84,6 @@ export const changeTodolistFilterAC = (id: string, filter: FilterValueType): Cha
     return {type: 'CHANGE-TODOLIST-FILTER', id: id, filter: filter}
 }
 
+export const setTodolistsAC = (todolists: Array<TodolistType>) => {
+    return {type: 'SET-TODOLISTS', todolists} as const
+}
