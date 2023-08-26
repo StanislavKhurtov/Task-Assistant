@@ -84,7 +84,9 @@ export const AppWithReducer = () => {
         dispatchToTasksReducer(removeTaskAC(todolistID, id));
     };
 
+
     const addTask = (todolistID: string, title: string) => {
+        // @ts-ignore
         dispatchToTasksReducer(addTaskAC(todolistID, title));
     };
 
