@@ -9,15 +9,17 @@ import {
     changeTodolistFilterAC,
     changeTodolistTitleAC,
     FilterValueType,
+    getTodolistTC,
     removeTodolistAC,
-    setTodolistsAC,
-    TodolistDomainType,
+    TodolistDomainType
 } from "./state/todolist-reducer";
-import {addTaskAC, changeTaskStatusAC, changeTaskTitleAC, removeTaskAC} from "./state/task-reducer";
-import {useDispatch, useSelector} from "react-redux";
-import {AppRootState} from "./state/store";
-import {TaskStatuses, TaskType, todolistAPI} from "./api/todolist-api";
-
+import {
+    changeTaskTitleAC,
+    createTaskTC,
+    deleteTaskTC, updateTaskTC
+} from "./state/task-reducer";
+import {useAppDispatch, useAppSelector} from "./state/store";
+import {TaskStatuses, TaskType} from "./api/todolist-api";
 
 export type TasksStateType = {
     [key: string]: Array<TaskType>
@@ -26,17 +28,16 @@ export type TasksStateType = {
 
 export const AppWithRedux = React.memo(() => {
 
-    const todolists = useSelector<AppRootState, Array<TodolistDomainType>>(state => state.todolists);
-    const tasks = useSelector<AppRootState, TasksStateType>(state => state.tasks);
-
-    const dispatch = useDispatch();
+    const todolists = useAppSelector<Array<TodolistDomainType>>(state => state.todolists);
+    const tasks = useAppSelector<TasksStateType>(state => state.tasks);
+    const dispatch = useAppDispatch()
 
     const removeTask = useCallback((todolistID: string, id: string) => {
-        dispatch(removeTaskAC(todolistID, id));
+        dispatch(deleteTaskTC(todolistID, id));
     }, [dispatch]);
 
     const addTask = useCallback((todolistID: string, title: string) => {
-        dispatch(addTaskAC(todolistID, title));
+        dispatch(createTaskTC(todolistID,title));
     }, [dispatch]);
 
     const changeTaskTitle = useCallback((todolistId: string, id: string, newValue: string) => {
@@ -44,7 +45,7 @@ export const AppWithRedux = React.memo(() => {
     }, [dispatch]);
 
     const changeStatus = useCallback((todolistID: string, taskId: string, status: TaskStatuses) => {
-        dispatch(changeTaskStatusAC(todolistID, taskId, status));
+        dispatch(updateTaskTC(todolistID,taskId,status));
     }, [dispatch]);
 
     const changeFilter = useCallback((todolistID: string, value: FilterValueType) => {
@@ -64,11 +65,7 @@ export const AppWithRedux = React.memo(() => {
     }, [dispatch]);
 
     useEffect(() => {
-        todolistAPI.getTodolist()
-            .then(res => {
-                res.data
-                dispatch(setTodolistsAC(res.data))
-            })
+        dispatch(getTodolistTC())
     }, [])
 
 
