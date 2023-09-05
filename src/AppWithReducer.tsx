@@ -1,6 +1,6 @@
 import React, {useReducer} from 'react';
 import './App.css';
-import { Todolist} from "./Todolist";
+import {Todolist} from "./Todolist";
 import {v1} from "uuid";
 import {AddItemForm} from "./AddItemForm";
 import {AppBar, Button, Container, Grid, IconButton, Paper, Toolbar, Typography} from "@material-ui/core";
@@ -8,7 +8,8 @@ import {Menu} from "@material-ui/icons";
 import {
     addTodolistAC,
     changeTodolistFilterAC,
-    changeTodolistTitleAC, FilterValueType,
+    changeTodolistTitleAC,
+    FilterValueType,
     removeTodolistAC,
     todolistsReducer
 } from "./state/todolist-reducer";
@@ -26,49 +27,58 @@ export const AppWithReducer = () => {
     const todolistId_2 = v1();
 
     let [todolists, dispatchToTodolistReducer] = useReducer(todolistsReducer, [
-        {id: todolistId_1, title: 'What to learn', filter: "all",addedDate: '', order: 0},
-        {id: todolistId_2, title: 'What to buy', filter: "all",addedDate: '', order: 0},
+        {id: todolistId_1, title: 'What to learn', filter: "all", addedDate: '', order: 0},
+        {id: todolistId_2, title: 'What to buy', filter: "all", addedDate: '', order: 0},
     ]);
 
     let [tasks, dispatchToTasksReducer] = useReducer(tasksReducer, {
         [todolistId_1]: [
-            {id: v1(), title: 'HTML&CSS', status: TaskStatuses.Completed,
+            {
+                id: v1(), title: 'HTML&CSS', status: TaskStatuses.Completed,
                 todolistId: todolistId_1,
                 description: '',
                 startDate: '',
                 deadline: '',
                 addedDate: '',
                 order: 0,
-                priority: TaskPriorities.Low},
-            {id: v1(), title: 'JavaScript', status: TaskStatuses.Completed,
+                priority: TaskPriorities.Low
+            },
+            {
+                id: v1(), title: 'JavaScript', status: TaskStatuses.Completed,
                 todolistId: todolistId_1,
                 description: '',
                 startDate: '',
                 deadline: '',
                 addedDate: '',
                 order: 0,
-                priority: TaskPriorities.Low},
-            {id: v1(), title: 'React', status: TaskStatuses.New,
+                priority: TaskPriorities.Low
+            },
+            {
+                id: v1(), title: 'React', status: TaskStatuses.New,
                 todolistId: todolistId_1,
                 description: '',
                 startDate: '',
                 deadline: '',
                 addedDate: '',
                 order: 0,
-                priority: TaskPriorities.Low},
+                priority: TaskPriorities.Low
+            },
 
 
         ],
         [todolistId_2]: [
-            {id: v1(), title: 'Book', status: TaskStatuses.Completed,
+            {
+                id: v1(), title: 'Book', status: TaskStatuses.Completed,
                 todolistId: todolistId_2,
                 description: '',
                 startDate: '',
                 deadline: '',
                 addedDate: '',
                 order: 0,
-                priority: TaskPriorities.Low},
-            {id: v1(), title: 'Milk', status: TaskStatuses.Completed,
+                priority: TaskPriorities.Low
+            },
+            {
+                id: v1(), title: 'Milk', status: TaskStatuses.Completed,
 
                 todolistId: todolistId_2,
                 description: '',
@@ -76,7 +86,8 @@ export const AppWithReducer = () => {
                 deadline: '',
                 addedDate: '',
                 order: 0,
-                priority: TaskPriorities.Low},
+                priority: TaskPriorities.Low
+            },
         ],
     })
 
@@ -108,8 +119,14 @@ export const AppWithReducer = () => {
     };
 
     const addTodolist = (title: string) => {
-        dispatchToTasksReducer(addTodolistAC(title));
-        dispatchToTodolistReducer(addTodolistAC(title));
+        const action = addTodolistAC({
+            id: v1(),
+            addedDate: '',
+            order: 0,
+            title
+        })
+        dispatchToTasksReducer(action);
+        dispatchToTodolistReducer(action);
     };
 
     const changeTodolistTitle = (todolistId: string, newTitle: string) => {
