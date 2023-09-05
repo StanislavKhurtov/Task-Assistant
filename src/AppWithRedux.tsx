@@ -5,12 +5,12 @@ import {AddItemForm} from "./AddItemForm";
 import {AppBar, Button, Container, Grid, IconButton, Paper, Toolbar, Typography} from "@material-ui/core";
 import {Menu} from "@material-ui/icons";
 import {
-    addTodolistAC,
+    addTodolistAC, addTodolistTC,
     changeTodolistFilterAC,
-    changeTodolistTitleAC,
+    changeTodolistTitleAC, changeTodolistTitleTC,
     FilterValueType,
     getTodolistTC,
-    removeTodolistAC,
+    removeTodolistAC, removeTodolistTC,
     TodolistDomainType
 } from "./state/todolist-reducer";
 import {
@@ -31,6 +31,10 @@ export const AppWithRedux = React.memo(() => {
     const todolists = useAppSelector<Array<TodolistDomainType>>(state => state.todolists);
     const tasks = useAppSelector<TasksStateType>(state => state.tasks);
     const dispatch = useAppDispatch()
+
+    useEffect(() => {
+        dispatch(getTodolistTC())
+    }, [])
 
     const removeTask = useCallback((todolistID: string, id: string) => {
         dispatch(deleteTaskTC(todolistID, id));
@@ -53,20 +57,16 @@ export const AppWithRedux = React.memo(() => {
     }, [dispatch]);
 
     const removeTodolist = useCallback((todolistId: string) => {
-        dispatch(removeTodolistAC(todolistId));
+        dispatch(removeTodolistTC(todolistId));
     }, [dispatch]);
 
     const addTodolist = useCallback((title: string) => {
-        dispatch(addTodolistAC(title));
+        dispatch(addTodolistTC(title));
     }, [dispatch]);
 
     const changeTodolistTitle = useCallback((todolistId: string, newTitle: string) => {
-        dispatch(changeTodolistTitleAC(todolistId, newTitle))
+        dispatch(changeTodolistTitleTC(todolistId,newTitle))
     }, [dispatch]);
-
-    useEffect(() => {
-        dispatch(getTodolistTC())
-    }, [])
 
 
     return (
