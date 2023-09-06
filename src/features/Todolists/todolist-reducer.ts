@@ -1,5 +1,6 @@
 import {todolistAPI, TodolistType} from "../../api/todolist-api";
 import {Dispatch} from "redux";
+import {setStatusAC, SetStatusActionType} from "../../app/app-reducer";
 
 export const todolistsReducer = (state: Array<TodolistDomainType> = initialState, action: ActionType): Array<TodolistDomainType> => {
     switch (action.type) {
@@ -16,7 +17,7 @@ export const todolistsReducer = (state: Array<TodolistDomainType> = initialState
             return state.map(tl => tl.id === action.id ? {...tl, filter: action.filter} : tl);
         }
         case 'SET-TODOLISTS': {
-            return action.todolists.map(tl => ({...tl,filter: 'all'}))
+            return action.todolists.map(tl => ({...tl, filter: 'all'}))
         }
         default:
             return state;
@@ -38,10 +39,12 @@ export const setTodolistsAC = (todolists: Array<TodolistType>) =>
 // Thunk Creator
 
 
-export const getTodolistTC = () => (dispatch: Dispatch<ActionType>) => {
+export const getTodolistTC = () => (dispatch: Dispatch<ActionType | SetStatusActionType>) => {
+    dispatch(setStatusAC('loading'))
     todolistAPI.getTodolist()
         .then((res) => {
             dispatch(setTodolistsAC(res.data))
+            dispatch(setStatusAC('succeeded'))
         })
 }
 export const removeTodolistTC = (todolistId: string) => (dispatch: Dispatch<ActionType>) => {

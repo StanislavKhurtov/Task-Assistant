@@ -1,7 +1,8 @@
 import * as React from 'react';
 import Snackbar from '@material-ui/core/Snackbar';
 import MuiAlert, {AlertProps} from '@material-ui/core/Alert';
-import {useAppSelector} from "../../app/store";
+import {useAppDispatch, useAppSelector} from "../../app/store";
+import {setErrorAC} from "../../app/app-reducer";
 
 const Alert = React.forwardRef<HTMLDivElement, AlertProps>(function Alert(
     props, ref) {
@@ -9,15 +10,15 @@ const Alert = React.forwardRef<HTMLDivElement, AlertProps>(function Alert(
 })
 
 export const ErrorSnackbar = () => {
+    const error = useAppSelector<string | null>(state => state.app.error);
+    const dispatch = useAppDispatch();
 
     const handleClose = (event?: React.SyntheticEvent | Event, reason?: string) => {
         if (reason === 'clickaway') {
             return
         }
-        // setOpen(false)
+     dispatch(setErrorAC(null))
     }
-
-    const error = useAppSelector<string | null>(state => state.app.error)
 
     const isOpen = error !== null
 
