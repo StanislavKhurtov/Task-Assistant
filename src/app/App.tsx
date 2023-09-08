@@ -12,7 +12,7 @@ export type TasksStateType = {
     [key: string]: Array<TaskType>
 }
 
-export const AppWithRedux = React.memo(() => {
+export const App = React.memo(() => {
     const status = useAppSelector<RequestStatusType>(state => state.app.status)
     return (
         <div className="App">
