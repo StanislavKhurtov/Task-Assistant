@@ -14,7 +14,7 @@ import {TaskStatuses} from "../../api/todolist-api";
 import {Grid, Paper} from "@material-ui/core";
 import {AddItemForm} from "../../components/AddItemForm/AddItemForm";
 import {Todolist} from "./Todolist/Todolist";
-import {TasksStateType} from "../../app/AppWithRedux";
+import {TasksStateType} from "../../app/App";
 
 
 
