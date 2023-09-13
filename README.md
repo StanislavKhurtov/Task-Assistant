@@ -159,4 +159,16 @@ lesson13 - 03 - Todolist for student (миграция на новые типы 
 
 lesson 15 - 01 - Todolist for student (Progressbar and error handling (part 1))
 
+//==========================================================//
 
+16 - Todolist for student (App initializing, routers, redirect, auth/me)
+
+ – валидация
+ – thunk
+ – про formik
+ – isLoggedIn
+ – Redirect (в router-dom vs6 – Navigate)
+ – authMe
+ – isInitialized
+ – как всё работает (flow приложения)
+ – log out
