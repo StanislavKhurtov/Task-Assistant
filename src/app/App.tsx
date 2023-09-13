@@ -12,7 +12,11 @@ export type TasksStateType = {
     [key: string]: Array<TaskType>
 }
 
-export const App = React.memo(() => {
+type PropsType = {
+    demo?: boolean
+}
+
+export const App = React.memo(({demo = false}: PropsType) => {
     const status = useAppSelector<RequestStatusType>(state => state.app.status)
     return (
         <div className="App">
@@ -27,10 +31,10 @@ export const App = React.memo(() => {
                     </Typography>
                     <Button color="inherit">Login</Button>
                 </Toolbar>
-                {status === 'loading' && <LinearProgress />}
+                {status === 'loading' && <LinearProgress/>}
             </AppBar>
             <Container fixed>
-                <TodolistList/>
+                <TodolistList demo={demo}/>
             </Container>
         </div>
     );
