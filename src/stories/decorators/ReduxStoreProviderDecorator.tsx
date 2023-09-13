@@ -54,6 +54,9 @@ const initialGlobalState: AppRootState = {
     app: {
         error:null,
         status: 'idle'
+    },
+    login: {
+        isLoggedIn: false
     }
 };
 

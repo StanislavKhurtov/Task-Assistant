@@ -1,6 +1,7 @@
 import {todolistAPI, TodolistType} from "../../api/todolist-api";
 import {Dispatch} from "redux";
-import {RequestStatusType, setAppStatusAC, SetStatusActionType} from "../../app/app-reducer";
+import {RequestStatusType, setAppStatusAC, SetErrorActionType, SetStatusActionType} from "../../app/app-reducer";
+import {handleServerNetworkError} from "../../utils/error-utils";
 
 export const todolistsReducer = (state: Array<TodolistDomainType> = initialState, action: ActionType): Array<TodolistDomainType> => {
     switch (action.type) {
@@ -45,12 +46,15 @@ export const changeTodolistEntityStatusAC = (id: string, status: RequestStatusTy
 // Thunk Creator
 
 
-export const getTodolistTC = () => (dispatch: Dispatch<ActionType>) => {
+export const getTodolistTC = () => (dispatch: ThunkDispatch) => {
     dispatch(setAppStatusAC('loading'));
     todolistAPI.getTodolist()
         .then((res) => {
             dispatch(setTodolistsAC(res.data));
             dispatch(setAppStatusAC('succeeded'));
+        })
+        .catch(error => {
+            handleServerNetworkError(error, dispatch)
         })
 }
 export const removeTodolistTC = (todolistId: string) => (dispatch: Dispatch<ActionType>) => {
@@ -102,6 +106,7 @@ export type TodolistDomainType = TodolistType & {
     entityStatus: RequestStatusType
 }
 
+type ThunkDispatch = Dispatch<ActionType | SetErrorActionType | SetStatusActionType>
 
 
 
