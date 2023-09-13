@@ -10,6 +10,10 @@ import {
     TextField
 } from "@material-ui/core";
 import {useFormik} from "formik";
+import {useDispatch} from "react-redux";
+import {loginTC} from "./login-reducer";
+import {AnyAction} from "redux";
+import {AppRootState, useAppDispatch} from "../../app/store";
 
 type FormikErrorType = {
     email?: string
@@ -19,6 +23,8 @@ type FormikErrorType = {
 
 
 export const Login = () => {
+
+    const dispatch = useAppDispatch()
 
     const formik = useFormik({
         initialValues: {
@@ -30,13 +36,14 @@ export const Login = () => {
             const errors: FormikErrorType = {}
             if (!values.email) {
                 errors.email = 'Required'
+
             } else if (!/^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,4}$/i.test(values.email)) {
                 errors.email = 'Invalid email address'
             }
             return errors
         },
         onSubmit: values => {
-            alert(JSON.stringify(values));
+            dispatch(loginTC(values))
         },
     })
 
@@ -62,6 +69,7 @@ export const Login = () => {
                             name='email'
                             onChange={formik.handleChange}
                             value={formik.values.email}
+                            onBlur={formik.handleBlur}
                         />
                         {formik.errors.email ? <div style={{color: 'red'}}>{formik.errors.email}</div> : null}
                         <TextField
@@ -71,6 +79,7 @@ export const Login = () => {
                             name='password'
                             onChange={formik.handleChange}
                             value={formik.values.password}
+                            onBlur={formik.handleBlur}
                         />
                         {formik.errors.password ? <div style={{color: 'red'}}>{formik.errors.password}</div> : null}
                         <FormControlLabel
