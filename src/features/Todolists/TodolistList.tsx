@@ -16,15 +16,19 @@ import {AddItemForm} from "../../components/AddItemForm/AddItemForm";
 import {Todolist} from "./Todolist/Todolist";
 import {TasksStateType} from "../../app/App";
 
+type TodolistsListPropsType = {
+    demo?: boolean
+}
 
-
-export const TodolistList: React.FC = () => {
-
+export const TodolistList: React.FC<TodolistsListPropsType> = ({demo = false}) => {
     const todolists = useAppSelector<Array<TodolistDomainType>>(state => state.todolists);
     const tasks = useAppSelector<TasksStateType>(state => state.tasks);
     const dispatch = useAppDispatch()
 
     useEffect(() => {
+        if (demo) {
+            return
+        }
         dispatch(getTodolistTC())
     }, [])
 
@@ -76,18 +80,17 @@ export const TodolistList: React.FC = () => {
                             <Grid item>
                                 <Paper style={{padding: "20px"}}>
                                     <Todolist
+                                        todolist={el}
                                         key={el.id}
-                                        id={el.id}
-                                        title={el.title}
                                         tasks={taskForTodolist}
                                         removeTask={removeTask}
                                         changeFilter={changeFilter}
                                         addTask={addTask}
                                         changeStatus={changeStatus}
-                                        filter={el.filter}
                                         removeTodolist={removeTodolist}
                                         changeTaskTitle={changeTaskTitle}
                                         changeTodolistTitle={changeTodolistTitle}
+                                        demo={demo}
                                     />
                                 </Paper>
                             </Grid>
