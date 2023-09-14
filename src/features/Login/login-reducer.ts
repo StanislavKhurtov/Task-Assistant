@@ -51,6 +51,8 @@ type InitialStateType = {
     isLoggedIn: boolean
 }
 
-type ActionType = ReturnType<typeof setIsLoggedInAC> | SetStatusActionType | SetErrorActionType
+export type SetIsLoginInType = ReturnType<typeof setIsLoggedInAC>
+
+type ActionType = SetIsLoginInType | SetStatusActionType | SetErrorActionType
 
 
