@@ -53,7 +53,8 @@ const initialGlobalState: AppRootState = {
     },
     app: {
         error:null,
-        status: 'idle'
+        status: 'idle',
+        isInitialized: false
     },
     login: {
         isLoggedIn: false
