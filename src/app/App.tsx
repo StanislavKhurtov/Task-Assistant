@@ -1,12 +1,21 @@
-import React from 'react';
+import React, {useCallback, useEffect} from 'react';
 import './App.css';
-import {AppBar, Button, Container, IconButton, LinearProgress, Toolbar, Typography} from "@material-ui/core";
+import {
+    AppBar,
+    Button,
+    CircularProgress,
+    Container,
+    IconButton,
+    LinearProgress,
+    Toolbar,
+    Typography
+} from "@material-ui/core";
 import {Menu} from "@material-ui/icons";
 import {TaskType} from "../api/todolist-api";
 import {TodolistList} from "../features/Todolists/TodolistList";
 import {ErrorSnackbar} from "../components/ErrorSnackbar/ErrorSnackbar";
-import {useAppSelector} from "./store";
-import {RequestStatusType} from "./app-reducer";
+import {useAppDispatch, useAppSelector} from "./store";
+import {initializedAppTC, logoutTC, RequestStatusType} from "./app-reducer";
 import {BrowserRouter, Route, Routes} from "react-router-dom";
 import {Login} from "../features/Login/Login";
 
@@ -19,8 +28,26 @@ type PropsType = {
 }
 
 export const App = React.memo(({demo = false}: PropsType) => {
-
+    const dispatch = useAppDispatch()
     const status = useAppSelector<RequestStatusType>(state => state.app.status)
+    const isInitialized = useAppSelector<boolean>(state => state.app.isInitialized)
+    const isLoggedIn = useAppSelector<boolean>(state => state.login.isLoggedIn)
+
+    const logoutHandler = useCallback(() => {
+        dispatch(logoutTC())
+    },[])
+
+    useEffect(() => {
+        dispatch(initializedAppTC())
+    }, [])
+
+    if (!isInitialized) {
+        return (
+            <div style={{position: "fixed", top: '40%', textAlign: 'center', width: '100%'}}>
+                <CircularProgress/>
+            </div>
+        )
+    }
 
     return (
         <BrowserRouter>
@@ -34,7 +61,7 @@ export const App = React.memo(({demo = false}: PropsType) => {
                         <Typography variant="h6" component="div" sx={{flexGrow: 1}}>
                             News
                         </Typography>
-                        <Button color="inherit">Login</Button>
+                        {isLoggedIn && <Button color="inherit" onClick={logoutHandler}>Log Out</Button>}
                     </Toolbar>
                     {status === 'loading' && <LinearProgress/>}
                 </AppBar>
@@ -42,7 +69,7 @@ export const App = React.memo(({demo = false}: PropsType) => {
                     <Routes>
                         <Route path={"/"} element={<TodolistList demo={demo}/>}/>
                         <Route path={"/login"} element={<Login/>}/>
-                        <Route path='*' element={<h1>404: PAGE NOT FOUND</h1>} />
+                        <Route path='*' element={<h1>404: PAGE NOT FOUND</h1>}/>
                     </Routes>
                 </Container>
             </div>
