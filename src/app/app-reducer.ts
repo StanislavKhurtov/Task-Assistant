@@ -1,11 +1,15 @@
 import {Dispatch} from "redux";
-import {setIsLoggedInAC, SetIsLoginInType} from "../features/Login/login-reducer";
+import {setIsLoggedInAC} from "../features/Login/auth-reducer";
 import {authAPI} from "../api/todolist-api";
 import {handleServerAppError, handleServerNetworkError} from "../utils/error-utils";
+import {createSlice, PayloadAction} from "@reduxjs/toolkit";
 
 export type InitialStateType = {
+    // происходит ли сейчас взайимодействие с сервером
     status: RequestStatusType
+    //если ошибка какая то глобальная произойдет - мы запишем текст ошибки сюда
     error: string | null
+    // true когда приложение проинициализировалось (проверили юзера , найстройки получили)
     isInitialized: boolean
 }
 export const initialstate: InitialStateType = {
@@ -14,48 +18,42 @@ export const initialstate: InitialStateType = {
     isInitialized: false
 }
 
-export const appReducer = (state: InitialStateType = initialstate, action: ActionsType): InitialStateType => {
-    switch (action.type) {
-        case 'SET-STATUS':
-            return {...state, status: action.status}
-        case 'SET-ERROR':
-            return {...state, error: action.error}
-        case 'APP/SET-IS-INITIALIZED':
-            return {...state, isInitialized: action.value}
-        default:
-            return {...state}
+const slice = createSlice({
+    name: 'app',
+    initialState: initialstate,
+    reducers: {
+        setAppInitializedAC(state, action: PayloadAction<{ isInitialized: boolean }>) {
+            state.isInitialized = action.payload.isInitialized;
+        },
+        setAppErrorAC(state, action: PayloadAction<{ error: string | null }>) {
+            state.error = action.payload.error;
+        },
+        setAppStatusAC(state, action: PayloadAction<{ status: RequestStatusType }>) {
+            state.status = action.payload.status
+        },
     }
-}
-
-export const setAppErrorAC = (error: string | null) => ({type: 'SET-ERROR', error} as const)
-export const setAppStatusAC = (status: RequestStatusType) => ({type: 'SET-STATUS', status} as const)
-export const setAppInitializedAC = (value: boolean) => ({type: 'APP/SET-IS-INITIALIZED', value} as const)
-
-
+})
+export const appReducer = slice.reducer;
+export const {setAppInitializedAC,setAppStatusAC,setAppErrorAC} = slice.actions;
 //thunk
-
-
 export const initializedAppTC = () => (dispatch: Dispatch) => {
     authAPI.me()
         .then(res => {
-        debugger
-        if (res.data.resultCode === 0) {
-            dispatch(setIsLoggedInAC(true));
+            if (res.data.resultCode === 0) {
+                dispatch(setIsLoggedInAC({value: true}));
 
-        }
-        else {
-        }
-            dispatch(setAppInitializedAC(true));
-    })
+            } else {
+            }
+            dispatch(setAppInitializedAC({isInitialized: true}));
+        })
 }
-
-export const logoutTC = () => (dispatch: ThunkDispatch ) => {
-    dispatch(setAppStatusAC('loading'))
+export const logoutTC = () => (dispatch:Dispatch) => {
+    dispatch(setAppStatusAC({status:'loading'}))
     authAPI.logout()
         .then(res => {
             if (res.data.resultCode === 0) {
-                dispatch(setIsLoggedInAC(false))
-                dispatch(setAppStatusAC('succeeded'))
+                dispatch(setIsLoggedInAC({value: false}))
+                dispatch(setAppStatusAC({status: 'succeeded'}))
             } else {
                 handleServerAppError(res.data, dispatch)
             }
@@ -65,18 +63,12 @@ export const logoutTC = () => (dispatch: ThunkDispatch ) => {
         })
 }
 
-
 // types
 
 export type RequestStatusType = 'idle' | 'loading' | 'succeeded' | 'failed'
 
-export type SetErrorActionType = ReturnType<typeof setAppErrorAC>
-export type SetStatusActionType = ReturnType<typeof setAppStatusAC>
-export type SetInitializedActionType = ReturnType<typeof setAppInitializedAC>
 
-type ActionsType =
-    SetErrorActionType
-    | SetStatusActionType
-    | SetInitializedActionType
 
-type ThunkDispatch = Dispatch<ActionsType | SetErrorActionType | SetStatusActionType | SetIsLoginInType>
+
+
+
