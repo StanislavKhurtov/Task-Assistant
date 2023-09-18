@@ -175,3 +175,14 @@ lesson 15 - 01 - Todolist for student (Progressbar and error handling (part 1))
 
 
 //==========================================================//
+
+lesson 17 - Todolist for student (Redux Toolkit, createSlice)
+ – установка
+ – redux-toolkit. начало
+ – auth-reducer
+ – app-reducer
+ – todolists-reducer
+ – extraReducers
+ – tasks-reducer
+ - зачем на нужен Redux-toolkit
+
