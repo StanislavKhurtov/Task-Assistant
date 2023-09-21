@@ -1,10 +1,9 @@
-import {todolistAPI, TodolistType} from "../../api/todolist-api";
-import {Dispatch} from "redux";
-import {RequestStatusType, setAppStatusAC} from "../../app/app-reducer";
-import {handleServerNetworkError} from "../../utils/error-utils";
+import {todolistAPI, TodolistType} from "api/todolist-api";
+import {appActions, RequestStatusType} from "app/app-reducer";
+import {handleServerNetworkError} from "utils/error-utils";
 import {createSlice, PayloadAction} from "@reduxjs/toolkit";
 import {fetchTasksTC} from "./task-reducer";
-import {AppRootState, AppThunk} from "../../app/store";
+import {AppThunk} from "app/store";
 
 const initialState: TodolistDomainType[] = []
 
@@ -46,17 +45,16 @@ const slice = createSlice({
         },
     }
 })
-
 export const todolistsReducer = slice.reducer;
 export const todolistsActions = slice.actions;
 
 // Thunk Creator
 export const getTodolistTC = ():AppThunk => (dispatch) => {
-    dispatch(setAppStatusAC({status: 'loading'}));
+    dispatch(appActions.setAppStatusAC({status: 'loading'}));
     todolistAPI.getTodolist()
         .then((res) => {
             dispatch(todolistsActions.setTodolistsAC({todolists :res.data}));
-            dispatch(setAppStatusAC({status: 'succeeded'}));
+            dispatch(appActions.setAppStatusAC({status: 'succeeded'}));
             return res.data
         })
         .then((todos) => {
@@ -69,20 +67,20 @@ export const getTodolistTC = ():AppThunk => (dispatch) => {
         })
 }
 export const removeTodolistTC = (todolistId: string):AppThunk => (dispatch) => {
-    dispatch(setAppStatusAC({status: 'loading'}))
+    dispatch(appActions.setAppStatusAC({status: 'loading'}))
     dispatch(todolistsActions.changeTodolistEntityStatusAC({id: todolistId ,status: 'loading'}))
     todolistAPI.deleteTodolist(todolistId)
         .then(() => {
             dispatch(todolistsActions.removeTodolistAC({id: todolistId}))
-            dispatch(setAppStatusAC({status: 'succeeded'}));
+            dispatch(appActions.setAppStatusAC({status: 'succeeded'}));
         })
 }
 export const addTodolistTC = (title: string):AppThunk => (dispatch) => {
-    dispatch(setAppStatusAC({status: 'loading'}));
+    dispatch(appActions.setAppStatusAC({status: 'loading'}));
     todolistAPI.createTodolist(title)
         .then((res) => {
             dispatch(todolistsActions.addTodolistAC({todolist: res.data.data.item}))
-            dispatch(setAppStatusAC({status: 'succeeded'}));
+            dispatch(appActions.setAppStatusAC({status: 'succeeded'}));
         })
 }
 export const changeTodolistTitleTC = (todolistId: string, title: string):AppThunk => (dispatch) => {
@@ -91,23 +89,3 @@ export const changeTodolistTitleTC = (todolistId: string, title: string):AppThun
             dispatch(todolistsActions.changeTodolistTitleAC({id: todolistId,title: title}))
         })
 }
-
-//type
-
-// export type AddTodolistActionType = ReturnType<typeof addTodolistAC>
-// export type RemoveTodolistActionType = ReturnType<typeof removeTodolistAC>
-// export type SetTodolistsActionType= ReturnType<typeof setTodolistsAC>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
