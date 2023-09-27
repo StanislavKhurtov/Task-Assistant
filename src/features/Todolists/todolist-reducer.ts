@@ -2,7 +2,7 @@ import {todolistAPI, TodolistType} from "api/todolist-api";
 import {appActions, RequestStatusType} from "app/app-reducer";
 import {handleServerNetworkError} from "utils/error-utils";
 import {createSlice, PayloadAction} from "@reduxjs/toolkit";
-import {fetchTasksTC} from "./task-reducer";
+import {fetchTasks} from "./task-reducer";
 import {AppThunk} from "app/store";
 
 const initialState: TodolistDomainType[] = []
@@ -59,7 +59,7 @@ export const getTodolistTC = ():AppThunk => (dispatch) => {
         })
         .then((todos) => {
             todos.forEach((tl) => {
-                dispatch(fetchTasksTC(tl.id));
+                dispatch(fetchTasks(tl.id));
             });
         })
         .catch(error => {
