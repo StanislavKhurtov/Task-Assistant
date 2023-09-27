@@ -9,15 +9,21 @@ import {
     Grid,
     TextField
 } from "@material-ui/core";
-import {useFormik} from "formik";
+import {FormikHelpers, useFormik} from "formik";
 import {loginTC} from "./auth-reducer";
-import {useAppDispatch, useAppSelector} from "../../app/store";
+import {useAppDispatch, useAppSelector} from "app/store";
 import {Navigate} from "react-router-dom";
 
 type FormikErrorType = {
     email?: string
     password?: string
     rememberMe?: boolean
+}
+
+type FormikValuesType = {
+    email: string
+    password: string
+    rememberMe: boolean
 }
 
 
@@ -44,8 +50,9 @@ export const Login = () => {
             }
             return errors
         },
-        onSubmit: values => {
-            dispatch(loginTC(values))
+        onSubmit: async (values, formikHelpers: FormikHelpers<FormikValuesType>) => {
+            const res = await dispatch(loginTC(values))
+            formikHelpers.setFieldError('email', 'fakeError')
         },
     })
 
