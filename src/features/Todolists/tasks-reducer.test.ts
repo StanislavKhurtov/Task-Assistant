@@ -1,7 +1,7 @@
 import {TasksStateType} from "app/App";
 import {TaskPriorities, TaskStatuses} from "api/todolist-api";
 import {todolistsActions} from "./todolist-reducer";
-import {fetchTasks, removeTask, tasksActions, tasksReducer} from "features/Todolists/task-reducer";
+import {tasksActions, tasksReducer, tasksThunks} from "features/Todolists/task-reducer";
 
 
 let startState: TasksStateType = {};
@@ -40,7 +40,7 @@ beforeEach(() => {
 
 test('correct task should be deleted from correct array', () => {
     let param = {todolistId: "todolistId2", taskId: "2"}
-    const action = removeTask.fulfilled(param, 'requsetId', param);
+    const action = tasksThunks.removeTask.fulfilled(param, 'requsetId', param);
 
     const endState = tasksReducer(startState, action)
 
@@ -145,7 +145,7 @@ test('empty arrays should be added when we set todolists', () => {
     expect(endState['2']).toBeDefined()
 })
 test('tasks should be added for todolist', () => {
-    const action = fetchTasks.fulfilled({
+    const action = tasksThunks.fetchTasks.fulfilled({
         todolistId: "todolistId1",
         tasks: startState["todolistId1"]
     }, 'requestId', 'todolistId1');
