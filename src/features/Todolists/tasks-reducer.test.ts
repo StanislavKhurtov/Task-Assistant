@@ -1,7 +1,7 @@
 import {TasksStateType} from "app/App";
 import {TaskPriorities, TaskStatuses} from "api/todolist-api";
 import {todolistsActions} from "./todolist-reducer";
-import {fetchTasks, removeTaskTC, tasksActions, tasksReducer} from "features/Todolists/task-reducer";
+import {fetchTasks, removeTask, tasksActions, tasksReducer} from "features/Todolists/task-reducer";
 
 
 let startState: TasksStateType = {};
@@ -40,7 +40,7 @@ beforeEach(() => {
 
 test('correct task should be deleted from correct array', () => {
     let param = {todolistId: "todolistId2", taskId: "2"}
-    const action = removeTaskTC.fulfilled(param, 'requsetId', param);
+    const action = removeTask.fulfilled(param, 'requsetId', param);
 
     const endState = tasksReducer(startState, action)
 
