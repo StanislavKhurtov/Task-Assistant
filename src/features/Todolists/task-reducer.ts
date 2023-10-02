@@ -8,6 +8,7 @@ import {todolistsActions} from "./todolist-reducer";
 import {appActions} from "app/app-reducer";
 
 const initialState: TasksStateType = {};
+
 export const fetchTasks = createAsyncThunk('tasks/fetchTasks', async (todolistId: string, thunkAPI) => {
     thunkAPI.dispatch(appActions.setAppStatusAC({status: 'loading'}))
     const res = await todolistAPI.getTasks(todolistId)
@@ -15,7 +16,6 @@ export const fetchTasks = createAsyncThunk('tasks/fetchTasks', async (todolistId
     return {todolistId, tasks: res.data.items}
 
 })
-
 export const removeTask = createAsyncThunk('tasks/removeTaskTC',
     async (param: { todolistId: string, taskId: string }, thunkAPI) => {
         thunkAPI.dispatch(appActions.setAppStatusAC({status: 'loading'}))
@@ -70,10 +70,8 @@ const slice = createSlice({
             });
     },
 })
-export const tasksReducer = slice.reducer;
-export const tasksActions = slice.actions;
 
-//Thunk Creators
+
 
 
 export const addTaskTC = (todolistId: string, title: string) => (dispatch: Dispatch) => {
@@ -136,5 +134,9 @@ export type UpdateDomeinTaskModelType = {
     deadline?: string
 }
 
+
+export const tasksReducer = slice.reducer;
+export const tasksActions = slice.actions;
+export const tasksThunks = { fetchTasks,removeTask }
 
 
