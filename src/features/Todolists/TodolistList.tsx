@@ -1,5 +1,5 @@
 import React, {useCallback, useEffect} from "react";
-import {useAppDispatch, useAppSelector} from "../../app/store";
+import {useAppDispatch, useAppSelector} from "app/store";
 import {
     addTodolistTC,
     changeTodolistTitleTC,
@@ -8,12 +8,12 @@ import {
     removeTodolistTC,
     TodolistDomainType, todolistsActions
 } from "./todolist-reducer";
-import {addTaskTC, removeTaskTC, updateTaskTC} from "./task-reducer";
-import {TaskStatuses} from "../../api/todolist-api";
+import {addTaskTC, tasksThunks, updateTaskTC} from "./task-reducer";
+import {TaskStatuses} from "api/todolist-api";
 import {Grid, Paper} from "@material-ui/core";
-import {AddItemForm} from "../../components/AddItemForm/AddItemForm";
+import {AddItemForm} from "components/AddItemForm/AddItemForm";
 import {Todolist} from "./Todolist/Todolist";
-import {TasksStateType} from "../../app/App";
+import {TasksStateType} from "app/App";
 import {Navigate} from "react-router-dom";
 
 type TodolistsListPropsType = {
@@ -34,7 +34,7 @@ export const TodolistList: React.FC<TodolistsListPropsType> = ({demo = false}) =
     }, [])
 
     const removeTask = useCallback((todolistId: string, taskId: string) => {
-        dispatch(removeTaskTC({todolistId, taskId}));
+        dispatch(tasksThunks.removeTask({todolistId, taskId}));
     }, [dispatch]);
 
     const addTask = useCallback((todolistID: string, title: string) => {
