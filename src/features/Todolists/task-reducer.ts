@@ -9,14 +9,14 @@ import {appActions} from "app/app-reducer";
 
 const initialState: TasksStateType = {};
 
-export const fetchTasks = createAsyncThunk('tasks/fetchTasks', async (todolistId: string, thunkAPI) => {
+const fetchTasks = createAsyncThunk('tasks/fetchTasks', async (todolistId: string, thunkAPI) => {
     thunkAPI.dispatch(appActions.setAppStatusAC({status: 'loading'}))
     const res = await todolistAPI.getTasks(todolistId)
     thunkAPI.dispatch(appActions.setAppStatusAC({status: 'succeeded'}))
     return {todolistId, tasks: res.data.items}
 
 })
-export const removeTask = createAsyncThunk('tasks/removeTaskTC',
+const removeTask = createAsyncThunk('tasks/removeTaskTC',
     async (param: { todolistId: string, taskId: string }, thunkAPI) => {
         thunkAPI.dispatch(appActions.setAppStatusAC({status: 'loading'}))
         const res = await todolistAPI.deleteTask(param.todolistId, param.taskId)
