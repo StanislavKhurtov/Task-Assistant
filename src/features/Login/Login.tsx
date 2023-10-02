@@ -14,13 +14,14 @@ import {loginTC} from "./auth-reducer";
 import {useAppDispatch, useAppSelector} from "app/store";
 import {Navigate} from "react-router-dom";
 
+
 type FormikErrorType = {
     email?: string
     password?: string
     rememberMe?: boolean
 }
 
-type FormikValuesType = {
+type FormValuesType = {
     email: string
     password: string
     rememberMe: boolean
@@ -31,7 +32,6 @@ export const Login = () => {
 
     const dispatch = useAppDispatch()
     const isLoggedIn = useAppSelector<boolean>(state => state.login.isLoggedIn)
-
 
 
     const formik = useFormik({
@@ -50,15 +50,23 @@ export const Login = () => {
             }
             return errors
         },
-        onSubmit: async (values, formikHelpers: FormikHelpers<FormikValuesType>) => {
-            const res = await dispatch(loginTC(values))
-            formikHelpers.setFieldError('email', 'fakeError')
+        onSubmit: async (values: FormValuesType, formikHelpers: FormikHelpers<FormValuesType>) => {
+            const action = await dispatch(loginTC(values))
+
+            if (loginTC.rejected.match(action)) {
+                const payload = action.payload as { fieldsErrors?: { field: string, error: string }[] };
+                if (payload && payload.fieldsErrors && payload.fieldsErrors.length) {
+                    const error = payload.fieldsErrors[0];
+                    formikHelpers.setFieldError(error.field, error.error);
+                }
+            }
         },
     })
 
     if (isLoggedIn) {
-        return <Navigate to={'/'} />
+        return <Navigate to={'/'}/>
     }
+
 
     return <Grid container justifyContent={'center'}>
         <Grid item justifyContent={'center'}>

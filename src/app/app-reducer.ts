@@ -1,7 +1,5 @@
 import {authAPI} from "api/todolist-api";
-import {handleServerAppError, handleServerNetworkError} from "utils/error-utils";
 import {createSlice, PayloadAction} from "@reduxjs/toolkit";
-import {todolistsActions} from "features/Todolists/todolist-reducer";
 import {AppThunk} from "./store";
 import {authActions} from "features/Login/auth-reducer";
 
@@ -48,22 +46,7 @@ export const initializedAppTC = ():AppThunk => (dispatch) => {
             dispatch(appActions.setAppInitializedAC({isInitialized: true}));
         })
 }
-export const logoutTC = (): AppThunk => (dispatch) => {
-    dispatch(appActions.setAppStatusAC({status:'loading'}))
-    authAPI.logout()
-        .then(res => {
-            if (res.data.resultCode === 0) {
-                dispatch(authActions.setIsLoggedInAC({value: false}))
-                dispatch(appActions.setAppStatusAC({status: 'succeeded'}))
-                dispatch(todolistsActions.clearTodosDataAC({}))
-            } else {
-                handleServerAppError(res.data, dispatch)
-            }
-        })
-        .catch((error) => {
-            handleServerNetworkError(error, dispatch)
-        })
-}
+
 
 // types
 

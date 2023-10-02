@@ -12,7 +12,9 @@ export const todolistAPI = {
         return instance.get<TodolistType[]>('todo-lists');
     },
     createTodolist(title: string) {
-        return instance.post<ResponseType<{ item: TodolistType }>, AxiosResponse<ResponseType<{ item: TodolistType }>>, { title: string }>('todo-lists', {title});
+        return instance.post<ResponseType<{ item: TodolistType }>, AxiosResponse<ResponseType<{
+            item: TodolistType
+        }>>, { title: string }>('todo-lists', {title});
     },
     deleteTodolist(id: string) {
         return instance.delete<ResponseType>(`todo-lists/${id}`);
@@ -27,10 +29,14 @@ export const todolistAPI = {
         return instance.delete<ResponseType>(`todo-lists/${todolistId}/tasks/${taskId}`);
     },
     createTask(todolistId: string, title: string) {
-        return instance.post<ResponseType<{ item: TaskType }>, AxiosResponse<ResponseType<{ item: TaskType }>>, { title: string }>(`todo-lists/${todolistId}/tasks`, {title});
+        return instance.post<ResponseType<{ item: TaskType }>, AxiosResponse<ResponseType<{ item: TaskType }>>, {
+            title: string
+        }>(`todo-lists/${todolistId}/tasks`, {title});
     },
     updateTask(todolistId: string, taskId: string, model: UpdateTaskModelType) {
-        return instance.put<ResponseType<{ item: TaskType }>, AxiosResponse<ResponseType<{ item: TaskType }>>, UpdateTaskModelType>(`todo-lists/${todolistId}/tasks/${taskId}`, model);
+        return instance.put<ResponseType<{ item: TaskType }>, AxiosResponse<ResponseType<{
+            item: TaskType
+        }>>, UpdateTaskModelType>(`todo-lists/${todolistId}/tasks/${taskId}`, model);
     }
 }
 
@@ -54,10 +60,10 @@ export const authAPI = {
         return instance.post<ResponseType<{ userId?: number }>>('auth/login', data);
     },
     logout() {
-        return instance.delete<ResponseType<{userId?: number}>>('auth/login');
+        return instance.delete<ResponseType<{ userId?: number }>>('auth/login');
     },
     me() {
-        return instance.get<ResponseType<{data:MeResponseType}>>('auth/me');
+        return instance.get<ResponseType<{ data: MeResponseType }>>('auth/me');
     }
 }
 
@@ -71,7 +77,7 @@ export type TodolistType = {
 export type ResponseType<D = {}> = {
     resultCode: number
     messages: Array<string>
-    fieldsErrors: Array<string>
+    fieldsErrors?: Array<{ field: string; error: string }>
     data: D
 }
 

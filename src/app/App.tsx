@@ -11,13 +11,14 @@ import {
     Typography
 } from "@material-ui/core";
 import {Menu} from "@material-ui/icons";
-import {TaskType} from "../api/todolist-api";
-import {TodolistList} from "../features/Todolists/TodolistList";
-import {ErrorSnackbar} from "../components/ErrorSnackbar/ErrorSnackbar";
+import {TaskType} from "api/todolist-api";
+import {TodolistList} from "features/Todolists/TodolistList";
+import {ErrorSnackbar} from "components/ErrorSnackbar/ErrorSnackbar";
 import {useAppDispatch, useAppSelector} from "./store";
-import {initializedAppTC, logoutTC, RequestStatusType} from "./app-reducer";
+import {initializedAppTC, RequestStatusType} from "./app-reducer";
 import {BrowserRouter, Route, Routes} from "react-router-dom";
-import {Login} from "../features/Login/Login";
+import {Login} from "features/Login/Login";
+import {logoutTC} from "features/Login/auth-reducer";
 
 export type TasksStateType = {
     [key: string]: Array<TaskType>
