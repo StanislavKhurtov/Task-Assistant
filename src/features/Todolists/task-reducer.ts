@@ -31,8 +31,8 @@ const addTask = createAsyncThunk(`tasks/addTask`,
     async (param: { todolistId: string, title: string }, thunkAPI) => {
         const {dispatch,rejectWithValue} = thunkAPI
         dispatch(appActions.setAppStatusAC({status: 'loading'}))
-        const res = await todolistAPI.createTask(param.todolistId, param.title)
         try {
+            const res = await todolistAPI.createTask(param.todolistId, param.title)
             if (res.data.resultCode === 0) {
                 dispatch(appActions.setAppStatusAC({status: 'succeeded'}))
                 return res.data.data.item
@@ -43,7 +43,6 @@ const addTask = createAsyncThunk(`tasks/addTask`,
         } catch (error: any) {
             handleServerNetworkError(error, dispatch)
             return rejectWithValue(null)
-
         }
     })
 
@@ -88,7 +87,7 @@ const slice = createSlice({
                 }
             })
             .addCase(addTask.fulfilled, (state, action) => {
-               // state[action.payload.task.todoListId].unshift(action.payload.task)
+               state[action.payload.todoListId].unshift(action.payload)
             })
     },
 })
