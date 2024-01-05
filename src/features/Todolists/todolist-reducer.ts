@@ -1,9 +1,10 @@
 import {todolistAPI, TodolistType} from "api/todolist-api";
 import {appActions, RequestStatusType} from "app/app-reducer";
-import {handleServerNetworkError} from "utils/error-utils";
+
 import {createSlice, PayloadAction} from "@reduxjs/toolkit";
 import {AppThunk} from "app/store";
 import {tasksThunks} from "features/Todolists/task-reducer";
+import {handleServerNetworkError} from "utils";
 
 const initialState: TodolistDomainType[] = []
 

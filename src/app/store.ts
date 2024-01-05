@@ -30,5 +30,7 @@ export const useAppSelector: TypedUseSelectorHook<AppRootState> = useSelector;
 
 export type ThunkType = ThunkDispatch<AppRootState, any, AnyAction>
 
+export type AppDispatch = ThunkDispatch<AppRootState, unknown, AnyAction>
+
 // @ts-ignore
 window.store = store

@@ -1,7 +1,7 @@
 import {authAPI, LoginParamsType} from "api/todolist-api";
-import {handleServerAppError, handleServerNetworkError} from "utils/error-utils";
 import {createAsyncThunk, createSlice, PayloadAction} from "@reduxjs/toolkit";
 import {appActions} from "app/app-reducer";
+import {handleServerAppError, handleServerNetworkError} from "utils";
 
 interface ErrorType {
     messages: string;

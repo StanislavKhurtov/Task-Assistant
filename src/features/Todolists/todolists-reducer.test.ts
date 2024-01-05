@@ -1,6 +1,6 @@
 import {v1} from 'uuid'
-import {TodolistType} from "../../api/todolist-api";
-import {RequestStatusType} from "../../app/app-reducer";
+import {TodolistType} from "api/todolist-api";
+import {RequestStatusType} from "app/app-reducer";
 import {FilterValueType, TodolistDomainType, todolistsActions, todolistsReducer} from "./todolist-reducer";
 
 
