@@ -88,6 +88,12 @@ export enum TaskStatuses {
     Draft = 3
 }
 
+export const ResultCode = {
+    success: 0,
+    error: 1,
+    captcha: 10
+} as const
+
 export enum TaskPriorities {
     Low = 0,
     Middle = 1,

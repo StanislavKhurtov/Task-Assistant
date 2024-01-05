@@ -8,7 +8,7 @@ import {
     removeTodolistTC,
     TodolistDomainType, todolistsActions
 } from "./todolist-reducer";
-import {tasksThunks, updateTaskTC} from "./task-reducer";
+import {tasksThunks} from "./task-reducer";
 import {TaskStatuses} from "api/todolist-api";
 import {Grid, Paper} from "@material-ui/core";
 import {AddItemForm} from "components/AddItemForm/AddItemForm";
@@ -37,16 +37,16 @@ export const TodolistList: React.FC<TodolistsListPropsType> = ({demo = false}) =
         dispatch(tasksThunks.removeTask({todolistId, taskId}));
     }, [dispatch]);
 
-    const addTask = useCallback((todolistId: string, title: string) => {
-        dispatch(tasksThunks.addTask({todolistId, title}));
+    const addTask = useCallback((id: string, title: string) => {
+        dispatch(tasksThunks.addTask({id, title}));
     }, [dispatch]);
 
     const changeTaskTitle = useCallback((todolistId: string, taskId: string, title: string) => {
-        dispatch(updateTaskTC(todolistId, taskId, {title}));
+        dispatch(tasksThunks.updateTask({todolistId, taskId, domainModel: {title}}));
     }, [dispatch]);
 
     const changeStatus = useCallback((todolistId: string, taskId: string, status: TaskStatuses) => {
-        dispatch(updateTaskTC(todolistId, taskId, {status}));
+        dispatch(tasksThunks.updateTask({todolistId, taskId, domainModel: {status}}));
     }, [dispatch]);
 
     const changeFilter = useCallback((todolistID: string, value: FilterValueType) => {
