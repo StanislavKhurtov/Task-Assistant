@@ -1,9 +1,7 @@
-import {ResultCode, TaskPriorities, TaskStatuses, TaskType, todolistAPI, UpdateTaskModelType} from "api/todolist-api";
-import {Dispatch} from "redux";
-import {AppRootState} from "app/store";
+import {ResultCode, TaskPriorities, tasksAPI, TaskStatuses, TaskType, UpdateTaskModelType} from "api/todolist-api";
 import {TasksStateType} from "app/App";
-import {createAsyncThunk, createSlice,PayloadAction} from "@reduxjs/toolkit";
-import {todolistsActions} from "./todolist-reducer";
+import {createSlice} from "@reduxjs/toolkit";
+import {todolistsActions, todolistThunk} from "./todolist-reducer";
 import {appActions} from "app/app-reducer";
 import {createAppAsyncThunk, handleServerAppError, handleServerNetworkError} from "utils";
 
@@ -16,7 +14,7 @@ const fetchTasks = createAppAsyncThunk<{ tasks: TaskType[]; todolistId: string }
 
         try {
             dispatch(appActions.setAppStatusAC({ status: 'loading' }))
-            const res = await todolistAPI.getTasks(todolistId)
+            const res = await tasksAPI.getTasks(todolistId)
 
             dispatch(appActions.setAppStatusAC({ status: 'succeeded' }))
 
@@ -37,7 +35,7 @@ const removeTask = createAppAsyncThunk<
 
     try {
         dispatch(appActions.setAppStatusAC({ status: 'loading' }))
-        const res = await todolistAPI.deleteTask(arg.todolistId, arg.taskId)
+        const res = await tasksAPI.deleteTask(arg.todolistId, arg.taskId)
 
         if (res.data.resultCode === ResultCode.success) {
             dispatch(appActions.setAppStatusAC({ status: 'succeeded' }))
@@ -62,7 +60,7 @@ const addTask = createAppAsyncThunk<{ task: TaskType }, { id: string; title: str
 
         try {
             dispatch(appActions.setAppStatusAC({ status: 'loading' }))
-            const res = await todolistAPI.createTask(arg.id, arg.title)
+            const res = await tasksAPI.createTask(arg.id, arg.title)
 
             if (res.data.resultCode === ResultCode.success) {
                 dispatch(appActions.setAppStatusAC({ status: 'succeeded' }))
@@ -108,7 +106,7 @@ const updateTask = createAppAsyncThunk<
         }
 
         dispatch(appActions.setAppStatusAC({ status: 'loading' }))
-        const res = await todolistAPI.updateTask(arg.todolistId, arg.taskId, apiModel)
+        const res = await tasksAPI.updateTask(arg.todolistId, arg.taskId, apiModel)
 
         if (res.data.resultCode === ResultCode.success) {
             dispatch(appActions.setAppStatusAC({ status: 'succeeded' }))
@@ -132,13 +130,13 @@ const slice = createSlice({
     reducers: {},
     extraReducers: (builder) => {
         builder
-            .addCase(todolistsActions.addTodolistAC, (state, action) => {
+            .addCase(todolistThunk.addTodolist.fulfilled, (state, action) => {
                 state[action.payload.todolist.id] = []
             })
-            .addCase(todolistsActions.removeTodolistAC, (state, action) => {
+            .addCase(todolistThunk.removeTodolist.fulfilled, (state, action) => {
                 delete state[action.payload.id]
             })
-            .addCase(todolistsActions.setTodolistsAC, (state, action) => {
+            .addCase(todolistThunk.getTodolist.fulfilled, (state, action) => {
                 action.payload.todolists.forEach((tl: any) => {
                     state[tl.id] = []
                 })
