@@ -1,188 +1,63 @@
-Todolist for student
+# [**Task Assistant**](https://stanislavkhurtov.github.io/travel/)
 
-//==========================================================//
+Text presentation
 
-lesson#01 - Todolist for students
+<img src="./img/"/>
 
+## Key Skills:
 
-//==========================================================//
+- Knowledge of JavaScript: Ability to add interactivity to web pages, handle events, create animations, work
+  with AJAX and basic functionality.
 
- lesson#02 - Todolist for students
- - метод "map"
- - удаление задач
- - функция для удаления задачи
- - фильтрация массива с task'ами
- - Local State (useState)
- - фильтрация задач (all | active | completed)
- - ИТОГ
+- Adaptive design and mobile layout: Experience with media queries, CSS frameworks and other tools for
+  creating responsive and mobile design.
 
+- Experience with CSS preprocessors: Knowledge and use of preprocessors such as Sass or Less to simplify CSS code
+  development and maintenance.
 
-//==========================================================//
+- Cross-browser compatibility: Ability to create web pages that work equally well across browsers (Chrome, Firefox,
+  Safari, etc.) and platforms.
 
-lesson#03 - Todolist for students
- - uuid
- - про key
- - addTask
- - чтение значения из input
- - очистка поля input (onChange)
- - добавление task при нажатии на enter (onKeyPress)
- - рефактор кода
- - рефактор функции удаления
+- Performance Optimization: Skills in optimizing page load, compressing and optimizing images, minifying and building
+  CSS and JavaScript files, caching and other techniques to improve site performance.
 
+- Development Tools: Experience with code editors (e.g. Visual Studio Code, WebStorm), version control systems (e.g. Git), and
+  browser inspectors (e.g. Chrome DevTools) for efficient development and debugging.
 
-/==========================================================//
+- Proficiency with design files and designer tools: Experience working with design files (e.g. PSD, Sketch, Figma) and
+  the ability to translate design layouts into code with high fidelity.
 
-lesson#04 - Todolist for students
- - начало. активный чекбокс
- - trim()
- - title is required
- - подсветка кнопок
+- Communication Skills: Ability to communicate effectively with designers, developers and other project stakeholders to
+  understand requirements and deliver results.
 
+## Technologies
 
-//==========================================================//
+- JavaScript
+- HTML,SCSS
+- GSAP Animation
+- Webpack
 
- lesson#06 - Todolist for students
- -  переиспользование input
- -  обертка addTask
- -  добавляем новый todolist
- -  типизация tasksObj
- -  редактирование span
- -  EditableSpan
- -  редактирование todolist name
- -  debugger (как работает editable span)
- -  резюме (рисовалка)
+## Installation and launch of the project
+
+- Clone the repository to your local computer.
+- Install depending on the command npm install.
+- Start the project by running npm start.
+- Open your web browser and check the address http://localhost:3000.
+
+## Utilization
+
+### [**Task Assistant**](https://stanislavkhurtov.github.io/travel/)
 
 
-//==========================================================//
+## Contribution to the project
 
-lesson#07 - Todolist for students (material-ui)
- - кнопки
- - инпут
- - чекбокс
- - AppBar
- - Container, grid
+We welcome input from the community and would be happy to accept your suggestions for improving the project. If you have
+any ideas, bug fixes or new features, please create a pull request or let us know.
 
+## Contacts
 
-//==========================================================//
+If you have any questions or require additional information, please contact us using the following contact information:
 
-lesson#08 - Todolist for student (reducer, unit test)
+Email: [skhurtov.work@yandex.ru](skhurtov.work@yandex.ru)
 
-- как работает reducer –
- - начало. игрушечные тесты
- - тесты для reducer
- - иммутабельность для редьюсера
- - TDD (test-driven development)
- - reducers for todolists
- - тесты для todolist reducers
- - типизация actions
- - action creators
- - debugger
-
-//==========================================================//
-
-lesson#09 - Todolist for student 09 (reducer for tasks, unit test)
- - начало
- - тесты
- - white board
-
-//==========================================================//
-
-lesson#10 - useReducer, redux
-
- Reducers - React
-- Redux
-- createStore
-- combineReducers
-- AppRootStateType
-- Provider from react-redux
-- return state default
-- initialState
-- useDispatch react-redux
-- useSelector react-redux
-- задание for Advanced Level  
-
-//==========================================================//
-
-lesson#11 - Todolist for student (useCallback, React.memo, immutability)
- - почему происходит глюк с перерисовкой
- - избавление от лишних просчетов при перерисовке V-dom
- - RectMemo
- - почему перерисовка компоненты App перерисовывает другие компоненты
- - избавляемся от лишней перерисовки колбэка с помощью useCallback
- - простая концепция про useCallback и React.memo
- - про иммутабильность
- - второй параметр в useCallback зависимости 
-
-//==========================================================//
-
-lesson12 - Todolist for student (storybook, decorator, snapshot testing)
- - начало
- - история для Task
- - декоратор
- - addons
- - snapshot testing теория
- - snapshot testing практика
-
-//==========================================================//
-
-lesson13 - 01 - Todolist for student (api, axios, rest api)
- - введение
- - теория (Rest API)
- - разбираем API todolists
- - подготовка для запроса тасок
- - про статус коды, Postman, JSON
- - создаем историю с запросами
- - get запрос todolists
- - post запрос
- - delete todolist
- - update todolist
- - рефакторинг
- - типизация
- - tasks API
-
-//==========================================================//
-
-lesson1313 - 02 - Todolist for student 13 (part 2) (api, axios, rest api)
-
-//==========================================================//
-
-lesson13 - 03 - Todolist for student (миграция на новые типы (подготовка к 14 занятию))
-37:40 – Provider decorator
-45:30 – tests
-
-//==========================================================//
-
-
-
-
-//==========================================================//
-
-lesson 15 - 01 - Todolist for student (Progressbar and error handling (part 1))
-
-//==========================================================//
-
-16 - Todolist for student (App initializing, routers, redirect, auth/me)
-
- – валидация
- – thunk
- – про formik
- – isLoggedIn
- – Redirect (в router-dom vs6 – Navigate)
- – authMe
- – isInitialized
- – как всё работает (flow приложения)
- – log out
-
-
-//==========================================================//
-
-lesson 17 - Todolist for student (Redux Toolkit, createSlice)
- – установка
- – redux-toolkit. начало
- – auth-reducer
- – app-reducer
- – todolists-reducer
- – extraReducers
- – tasks-reducer
- - зачем на нужен Redux-toolkit
-
+Thank you for your interest in our project!
