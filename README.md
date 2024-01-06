@@ -32,10 +32,11 @@ Text presentation
 
 ## Technologies
 
-- JavaScript
-- HTML,SCSS
+- TypeScript
+- React, Redux Toolkit
+- SCSS
 - GSAP Animation
-- Webpack
+- Vite
 
 ## Installation and launch of the project
 
